@@ -15,4 +15,15 @@ module.exports = {
     },
   },
   plugins: [],
+  theme: {
+    colors: {
+      'white': '#ffffff',
+      'primary': '#0079FF',
+      'title-color': '#1E1E1E',
+      'acc-color': '#777777',
+      'pl-color': '#aaaaaa',
+      'input-color': '#F6F7F9',
+      'acc-btn': '#D9D9D9'
+    },
+  }
 }
