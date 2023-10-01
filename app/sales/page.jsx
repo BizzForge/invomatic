@@ -1,8 +1,8 @@
 import React from 'react'
 import Console from '../tempates/console/console'
 
-export default function Dashboard() {
+export default function Sales() {
   return (
-    <Console>this is the dashboard page</Console>
+    <Console>This is the sales page</Console>
   )
 }

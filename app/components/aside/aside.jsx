@@ -13,6 +13,45 @@ export default function Aside() {
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
+
+    const menuItems = [
+        // {
+        //   link: '/sales',
+        //   Icon: ReceiptRefundIcon,
+        //   title: 'Sales',
+        // },
+        {
+          link: '/inventory',
+          Icon: InboxArrowDownIcon,
+          title: 'Inventory Management',
+        },
+        // {
+        //   link: '/dashboard',
+        //   Icon: ChartPieIcon,
+        //   title: 'Analytics',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: UserIcon,
+        //   title: 'Customer Management',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: MegaphoneIcon,
+        //   title: 'Promos',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: UsersIcon,
+        //   title: 'Supplier Management',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: BanknotesIcon,
+        //   title: 'Financial Management',
+        // },
+    ];
+
     return (
     <aside className={`w-${isOpen ? '[325px]' : '[72px]' } bg-white p-5 h-[calc(100vh)] transition-width transform shadow-lg`}>
         <div className='w-full my-12 pb-2'>
@@ -21,15 +60,18 @@ export default function Aside() {
                 {isOpen && <span className="text-lg text-title-color ml-[30px] font-bold">SwiftPOS</span>}
             </Link>
         </div>
-        <Fragment>
-            <AsideIcon link="/sales" Icon={ReceiptRefundIcon} isOpen={isOpen} title={'Sales'}/>
-            <AsideIcon link="/inventory" Icon={InboxArrowDownIcon} isOpen={isOpen} title={'Inventory Management'}/>
-            <AsideIcon link="/dashboard" Icon={ChartPieIcon} isOpen={isOpen} title={'Analytics'}/>
-            <AsideIcon link="/dashboard" Icon={UserIcon} isOpen={isOpen} title={'Customer Management'}/>
-            <AsideIcon link="/dashboard" Icon={MegaphoneIcon} isOpen={isOpen} title={'Promos'}/>
-            <AsideIcon link="/dashboard" Icon={UsersIcon} isOpen={isOpen} title={'Supplier Management'}/>
-            <AsideIcon link="/dashboard" Icon={BanknotesIcon} isOpen={isOpen} title={'Finacial Management'}/>
-        </Fragment>
+        
+        <div className='h-[calc(100vh-45%)]'>
+            {menuItems.map((menuItem, index) => (
+            <AsideIcon
+                key={index}
+                link={menuItem.link}
+                Icon={menuItem.Icon}
+                isOpen={isOpen}
+                title={menuItem.title}
+            />
+            ))}
+        </div>
 
         <div className="absolute bottom-0 left-0 w-full p-5">
             <div className="flex items-center space-x-[30px]">
