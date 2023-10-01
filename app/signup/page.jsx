@@ -1,23 +1,56 @@
 "use client";
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import Link from "next/link";
 import { EnvelopeIcon, LockClosedIcon, UserIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import Session from '../tempates/session/session.jsx';
 import Button from '../components/buttons/submit-button/submit-buton';
 import InputWithIcon from '../components/inputs/input-with-icon/input-with-icon';
 import AuthBtn from '../components/buttons/auth-button/auth-button.jsx';
+import axiosInterceptorInstance from '@/axiosInterceptorInstance.js';
+
 
 export default function Signup(title, subtitle) {
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        username: '',
+        password: ''
+    });
+
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    const handleClick = () => {
-        console.log('deni')
+    const config = {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
     }
+
+    const registrationApi = async () => {
+        await axiosInterceptorInstance.post('/register', user, config).then(res => {
+            console.log(res.data);
+            toast.success('Registration successful!');
+        }).catch(err =>{
+            console.error(err)
+            toast.error('Registration failed.');
+        });
+    }
+
+    const handleSubmit = async () => {
+        if (user.firstName && user.lastName && user.email && user.username && user.password) {
+            setButtonDisabled(true); 
+            await registrationApi();
+        } else {
+            toast.error('Please fill in all fields.');
+        }
+    }
+
+
     return (
         <Session>
             <div className="mb-3 mt-8">
                 <h1 className="font-bold mb-3 mt-0 text-4xl">Get Started</h1>
-                <p className="text-[16px] mb-4 text-acc-color">Already Have an account? <Link href="/" className="font-bold text-primary">Sigin </Link></p>
+                <p className="text-[16px] mb-4 text-acc-color">Already Have an account? <Link href="/" className="font-bold text-primary">Sign in </Link></p>
 
                 <Fragment>
                     <div className="block md:flex">
@@ -44,7 +77,8 @@ export default function Signup(title, subtitle) {
                     </div>
 
                     <div className="py-2">
-                        <Button text="Register"/>
+                        <Button text="Register" onSignup={handleSubmit} disabled={buttonDisabled}/>
+                        <Toaster />
                     </div>
 
                     <div className="py-2 items-center w-full flex">
@@ -54,8 +88,8 @@ export default function Signup(title, subtitle) {
                     </div>
 
                     <div className="w-full justify-between py2 flex">
-                        <AuthBtn icon="/images/7123025_logo_google_g_icon.svg" onClick={handleClick} text="Signup with Google" isFirst={true}/>
-                        <AuthBtn icon="/images/5296499_fb_facebook_facebook logo_icon.svg" onClick={handleClick} text="Signup with Facebook" isLast={true}/>
+                        <AuthBtn icon="/images/7123025_logo_google_g_icon.svg" text="Signup with Google" isFirst={true}/>
+                        <AuthBtn icon="/images/5296499_fb_facebook_facebook logo_icon.svg" text="Signup with Facebook" isLast={true}/>
                     </div>
                 </Fragment>
             </div>

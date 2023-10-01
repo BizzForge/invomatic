@@ -23,7 +23,8 @@ module.exports = {
       'acc-color': '#777777',
       'pl-color': '#aaaaaa',
       'input-color': '#F6F7F9',
-      'acc-btn': '#D9D9D9'
+      'acc-btn': '#D9D9D9',
+      'main-bg':'#F1F1F1'
     },
   }
 }
