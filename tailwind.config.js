@@ -24,6 +24,7 @@ module.exports = {
       'pl-color': '#aaaaaa',
       'input-color': '#F6F7F9',
       'acc-btn': '#D9D9D9',
+      'acc-color-2': '#737373',
       'main-bg':'#F1F1F1'
     },
   }
