@@ -1,65 +1,150 @@
-import React from 'react'
+import { BarsArrowDownIcon, BarsArrowUpIcon, PencilIcon } from '@heroicons/react/24/outline';
+import React, { Fragment, useState } from 'react';
 
-export default function Table() {
+export default function Table({ jsonData }) {
+  const [selectAll, setSelectAll] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [columnTitles, setColumnTitles] = useState([]);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(10); // Number of items per page
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+
+  const toggleSelectAll = () => {
+    setSelectAll(!selectAll);
+    if (!selectAll) {
+      const rowIndices = jsonData.data.map((item) => item.id);
+      setSelectedItems(rowIndices);
+    } else {
+      setSelectedItems([]);
+    }
+  };
+
+  const handleRowCheckboxChange = (rowIndex) => {
+    const newSelectedItems = selectedItems.includes(rowIndex)
+      ? selectedItems.filter((item) => item !== rowIndex)
+      : [...selectedItems, rowIndex];
+    setSelectedItems(newSelectedItems);
+  };
+
+  const handleSort = (fieldName) => {
+    if (sortField === fieldName) {
+      // Toggle sort direction
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      // Set the new sort field and direction
+      setSortField(fieldName);
+      setSortDirection('asc');
+    }
+  };
+
+  const sortedData = [...jsonData.data];
+
+  if (sortField) {
+    // Sort the data based on the current sortField and sortDirection
+    sortedData.sort((a, b) => {
+      const aValue = a[sortField];
+      const bValue = b[sortField];
+
+      if (sortDirection === 'asc') {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    });
+  }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedData = sortedData.slice(startIndex, endIndex);
+
+  const { titles, data } = jsonData;
+
+  if (titles && titles.length > 0 && !columnTitles.length) {
+    setColumnTitles(titles);
+  }
+
+  const handleItemsPerPageChange = (e) => {
+    setItemsPerPage(parseInt(e.target.value, 10));
+    setCurrentPage(1); // Reset to the first page when changing items per page
+  };
+
   return (
-    <div class="relative mt-4 overflow-x-auto">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-acc-color uppercase bg-gray">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Product name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Color
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Category
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Price
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white !text-acc-color-2 border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-acc-color-2 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
+    <div className="relative mt-4 overflow-x-auto">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 dark:border-gray-700">
+        <thead className="text-xs text-acc-color bg-gray border-b border-border-lines">
+          <tr>
+            <th scope="col" className="py-3" style={{ maxWidth: '200px' }}>
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 text-acc-color"
+                checked={selectAll}
+                onChange={toggleSelectAll}
+              />
+            </th>
+            {columnTitles.map((title, index) => (
+              <th key={index} scope="col" className="px-6 text-[14px] py-3 cursor-pointer" onClick={() => handleSort(title)} style={{ maxWidth: '200px' }}>
+                <span className='mr-2'>{title}</span>
+                <BarsArrowDownIcon className="w-4 h-4 inline-block" />
+              </th>
+            ))}
+            <th scope="col" className="px-6 py-3" style={{ maxWidth: '200px' }}>
+              Action 
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+              <tr
+                key={item.id}
+                className={`bg-white border-hidden !text-acc-color-2 dark:bg-gray-900 dark:border-gray-700 ${
+                  index === data.length - 1 ? '' : 'border-b'
+                }`}
+              >
+                <td className="py-2" style={{ maxWidth: '200px' }}>
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4 text-acc-color"
+                    checked={selectedItems.includes(item.id)}
+                    onChange={() => handleRowCheckboxChange(item.id)}
+                  />
+                </td>
+                {Object.keys(item)
+                  .filter((key) => key !== 'id') 
+                  .map((key) => (
+                    <td key={key} className="px-6 py-2" style={{ maxWidth: '200px' }}>
+                      {item[key]}
                     </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="border-b !text-acc-color-2 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-acc-color-2 whitespace-nowrap">
-                        Microsoft Surface Pro
-                    </th>
-                    <td class="px-6 py-4">
-                        White
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                  ))}
+                <td className="px-6 py-2" style={{ maxWidth: '200px' }}>
+                  <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <PencilIcon className="w-4 h-4 inline-block" />
+                  </a>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+      <div className="mt-4 flex py-3 items-center">
+        <Fragment>
+          <select
+            id="itemsPerPage"
+            className="border border-acc-color text-[13px] text-acc-color rounded-md px-1 py-[0.5px]"
+            value={itemsPerPage}
+            onChange={handleItemsPerPageChange}
+          >
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+          <label htmlFor="itemsPerPage"  className='text-acc-color text-[13px] ml-2'>
+            Items per page
+          </label>
+        </Fragment>
+        <div className='ml-2 text-[13px] text-title-color'>
+          {`${startIndex + 1}-${Math.min(endIndex, sortedData.length)} of ${sortedData.length} items`}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
