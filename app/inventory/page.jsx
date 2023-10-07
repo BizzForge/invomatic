@@ -41,6 +41,16 @@ export default function Inventory() {
         addedDate: '2023-09-15',
         expiryDate: '2024-09-15',
       },
+      {
+        id: 4,
+        productCode: 'XYZ800',
+        productName: 'Product 4',
+        category: 'Electronics',
+        quantity: 10,
+        price: '$199.99',
+        addedDate: '2023-09-15',
+        expiryDate: '2024-09-15',
+      },
     ],
   };
   const handleClick = () => {

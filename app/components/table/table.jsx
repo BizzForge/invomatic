@@ -1,4 +1,4 @@
-import { BarsArrowDownIcon, BarsArrowUpIcon, CalendarDaysIcon, EnvelopeIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { BarsArrowDownIcon, BarsArrowUpIcon, CalendarDaysIcon, MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/24/outline';
 import React, { Fragment, useState } from 'react';
 import InputWithIcon from '../inputs/input-with-icon/input-with-icon';
 import DatePicker from '../date-picker/date-picker';
@@ -69,7 +69,7 @@ export default function Table({ jsonData, title }) {
 
   const handleItemsPerPageChange = (e) => {
     setItemsPerPage(parseInt(e.target.value, 10));
-    setCurrentPage(1); // Reset to the first page when changing items per page
+    setCurrentPage(1);
   };
 
   return (
@@ -80,9 +80,9 @@ export default function Table({ jsonData, title }) {
         </div>
         <div className="flex table-left">
           <div className='mr-3'>
-            <InputWithIcon type="text" value={searchQuery} change={(e) => setSearchQuery(e.target.value)} icon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Search" />
+            <InputWithIcon type="text" value={searchQuery} change={(e) => setSearchQuery(e.target.value)} LeftIcon={<MagnifyingGlassIcon className="h-5 w-5 text-primary" />} placeholder="Search" />
           </div>
-          <DatePicker Icon={CalendarDaysIcon} title={"Select Date"} color="acc-color"/>
+          {/* <DatePicker Icon={CalendarDaysIcon} title={"Select Date"} color="acc-color"/> */}
         </div>
       </div>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 dark:border-gray-700">
@@ -97,7 +97,13 @@ export default function Table({ jsonData, title }) {
               />
             </th>
             {columnTitles.map((title, index) => (
-              <th key={index} scope="col" className="px-6 text-[14px] py-3 cursor-pointer" onClick={() => handleSort(title)} style={{ maxWidth: '200px' }}>
+              <th
+                key={index}
+                scope="col"
+                className="px-6 text-[14px] py-3 cursor-pointer"
+                onClick={() => handleSort(title)}
+                style={{ maxWidth: '200px', whiteSpace: 'nowrap' }} // Add this style
+              >
                 <span className='mr-2'>{title}</span>
                 <BarsArrowDownIcon strokeWidth={2} className="w-4 h-4 inline-block" />
               </th>

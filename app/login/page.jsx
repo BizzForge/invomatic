@@ -22,10 +22,10 @@ export default function Login() {
 
         <Fragment>
           <div className="py-2">
-            <InputWithIcon type="text" icon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Username or your@email.com" />
+            <InputWithIcon type="text" LeftIcon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Username or your@email.com" />
           </div>
           <div className="py-2">
-              <InputWithIcon type="password" icon={<LockClosedIcon className="h-5 w-5 text-primary" />} placeholder="At least 8 characters long" />
+              <InputWithIcon type="password" LeftIcon={<LockClosedIcon className="h-5 w-5 text-primary" />} placeholder="At least 8 characters long" />
           </div>
           <div className="w-full">
             <Link href="/login" className="pt-2 flex justify-end text-primary font-bold">Forgot Password</Link>
