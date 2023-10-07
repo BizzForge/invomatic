@@ -6,6 +6,7 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import Card from '../components/card/card';
 import { InboxArrowDownIcon} from '@heroicons/react/24/outline';
 import Table from '../components/table/table';
+import Button from '../components/buttons/submit-button/submit-buton';
 
 export default function Inventory() {
   const jsonData = {
@@ -59,7 +60,14 @@ export default function Inventory() {
   return (
     <Console>
       <div className="p-5">
-        <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Inventory'} onClick={handleClick}/>
+        <div className='flex justify-end items-center pb-5'>
+          <div className='px-1'>
+            <Button text="Export CSV" border={true}/>
+          </div>
+          <div className='pl-1'>
+            <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Inventory'} onClick={handleClick}/>
+          </div>
+        </div>
         <Card>
           <Table jsonData={jsonData} title={"In Stock"}/>
         </Card>
