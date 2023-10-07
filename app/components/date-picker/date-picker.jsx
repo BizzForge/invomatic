@@ -2,17 +2,47 @@ import React, {useState} from 'react'
 
 export default function DatePicker({Icon, title, color}) {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [selectedDate, setSelectedDate] = useState(null);
+  
+    const minDate = '2023-01-01'; // Set your min date here
+    const maxDate = '2023-12-31'; // Set your max date here
+  
     const toggleDatePicker = () => {
       setIsOpen(!isOpen);
-      console.log(isOpen)
     };
+  
+    const handleDateChange = (e) => {
+      setSelectedDate(e.target.value);
+      toggleDatePicker();
+    };
+  
     return (
-        <div className="relative max-w-sm">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none" onClick={toggleDatePicker}>
-                <Icon strokeWidth={2} className={`w-6 h-6 text-white text-${color}`} />
+      <div className="relative">
+        <div className="relative mt-2">
+          <input
+            id="date"
+            type="date"
+            className="p-2 px-10 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={selectedDate || ''}
+            onChange={handleDateChange}
+            onFocus={toggleDatePicker}
+            onBlur={toggleDatePicker}
+            placeholder="YYYY-MM-DD"
+            min={minDate}
+            max={maxDate}
+          />
+          {isOpen && (
+            <div className="absolute top-10 left-0 bg-white border border-gray-300 rounded-md shadow-md mt-1">
+              {/* Your custom date picker content here */}
+              {/* For simplicity, let's just display a static calendar */}
+              <div className="p-2">
+                <div className="grid grid-cols-7 gap-1">
+                  {/* ... Calendar days ... */}
+                </div>
+              </div>
             </div>
-            <input datepicker type="text" className="bg-main-bg border border-gray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={title} />
+          )}
         </div>
-    )
+      </div>
+    );
 }

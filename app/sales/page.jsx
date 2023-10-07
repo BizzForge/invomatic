@@ -1,12 +1,22 @@
+'use client'
 import React from 'react'
 import Console from '../tempates/console/console'
 import Card from '../components/card/card'
 import Image from 'next/image'
-import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
+import { EllipsisVerticalIcon, PlusIcon } from '@heroicons/react/24/outline'
+import ButtonWithIcon from '../components/buttons/button-with-icon/button-with-icon'
+import DatePicker from '../components/date-picker/date-picker'
 
 export default function Sales() {
+  const handleClick = () => {
+    console.log("Button clicked!");
+  }
   return (
     <Console>
+      <div className='flex justify-between items-center mb-4'>
+        <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Sale'} onClick={handleClick}/>
+        <DatePicker />
+      </div>
       <div className='flex flex-wrap -mx-4'>
         <div className='w-full md:w-1/3 px-4 mb-3'>
           <Card>
