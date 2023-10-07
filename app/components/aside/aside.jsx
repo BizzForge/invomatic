@@ -4,7 +4,7 @@ import {useState, Fragment} from 'react'
 import Image from 'next/image'
 import Link from "next/link";
 import AsideIcon from '../aside-icon/aside-icon';
-import { ReceiptRefundIcon, InboxArrowDownIcon, MegaphoneIcon, ChartPieIcon, UserIcon, UsersIcon, BanknotesIcon, ArrowLeftOnRectangleIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { ReceiptRefundIcon, InboxArrowDownIcon, MegaphoneIcon, ChartPieIcon, UserIcon, UsersIcon, BanknotesIcon, ArrowLeftOnRectangleIcon, Cog6ToothIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 
 export default function Aside() {
@@ -15,76 +15,84 @@ export default function Aside() {
     };
 
     const menuItems = [
-        // {
-        //   link: '/sales',
-        //   Icon: ReceiptRefundIcon,
-        //   title: 'Sales',
-        // },
+        {
+          link: '/sales',
+          Icon: ReceiptRefundIcon,
+          title: 'Sales',
+        },
         {
           link: '/inventory',
           Icon: InboxArrowDownIcon,
           title: 'Inventory Management',
         },
-        // {
-        //   link: '/dashboard',
-        //   Icon: ChartPieIcon,
-        //   title: 'Analytics',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: UserIcon,
-        //   title: 'Customer Management',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: MegaphoneIcon,
-        //   title: 'Promos',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: UsersIcon,
-        //   title: 'Supplier Management',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: BanknotesIcon,
-        //   title: 'Financial Management',
-        // },
+        {
+          link: '/dashboard',
+          Icon: ChartPieIcon,
+          title: 'Analytics',
+        },
+        {
+          link: '/dashboard',
+          Icon: UserIcon,
+          title: 'Customer Management',
+        },
+        {
+          link: '/dashboard',
+          Icon: MegaphoneIcon,
+          title: 'Promos',
+        },
+        {
+          link: '/dashboard',
+          Icon: UsersIcon,
+          title: 'Supplier Management',
+        },
+        {
+          link: '/dashboard',
+          Icon: BanknotesIcon,
+          title: 'Financial Management',
+        },
     ];
 
     return (
-    <aside className={`w-${isOpen ? '[325px]' : '[72px]' } bg-white p-5 h-[calc(100vh)] transition-width transform shadow-lg`}>
-        <div className='w-full my-12 pb-2'>
-            <Link href="/dashboard" onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'}`}>
-                <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />
-                {isOpen && <span className="text-lg text-title-color ml-[30px] font-bold">SwiftPOS</span>}
-            </Link>
-        </div>
-        
-        <div className='h-[calc(100vh-45%)]'>
-            {menuItems.map((menuItem, index) => (
-            <AsideIcon
-                key={index}
-                link={menuItem.link}
-                Icon={menuItem.Icon}
-                isOpen={isOpen}
-                title={menuItem.title}
-            />
-            ))}
+    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-[transparent] z-50 flex md:block md:bg-white p-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg`}>
+      <div className='flex md:block flex-row-reverse'>
+        <div className='md:w-full my-1 md:my-4 pb-2'>
+          <a onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-left' : 'justify-left'} cursor-pointer`}>
+            {isOpen ? <XMarkIcon strokeWidth={2} className="w-6 h-6 text-acc-color"/> : <Bars3CenterLeftIcon strokeWidth={2} className="w-6 h-6 text-acc-color"/>}
+          </a>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full p-5">
-            <div className="flex items-center space-x-[30px]">
-                <div className="w-6 h-6 rounded-full overflow-hidden">
-                    <Image src="/images/cool-profile-picture-87h46gcobjl5e4xu.jpg" alt="Profile" width={40} height={40} />
-                </div>
-                {isOpen && <p className="text-[16px] font-medium text-acc-color">Anwar Magara</p>}
-            </div>
-            <div className="mt-3">
-                <AsideIcon link="/settings" Icon={Cog6ToothIcon} isOpen={isOpen} title={'Settings'}/>
-                <AsideIcon link="/dashboard" Icon={ArrowLeftOnRectangleIcon} isOpen={isOpen} title={'Logout'}/>
-            </div>
+        <div className='md:w-full my-2 mr-4 md:ml-0 md:my-12 pb-2'>
+          <Link href='/dashboard' className={`flex w-full ${!isOpen ? 'justify-left' : 'justify-left'} transition-all ease-in-out`}>
+              <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />
+              {isOpen && <span className="text-lg text-title-color ml-[30px] md:block font-bold transition-all ease-in-out">SwiftPOS</span>}
+          </Link>
         </div>
+      </div>
+      
+      <div className='hidden md:block md:h-[calc(100vh-45%)]'>
+          {menuItems.map((menuItem, index) => (
+          <AsideIcon
+              key={index}
+              link={menuItem.link}
+              Icon={menuItem.Icon}
+              isOpen={isOpen}
+              title={menuItem.title}
+          />
+          ))}
+      </div>
+
+      <div className="relative md:absolute md:bottom-0 md:left-0 w-full md:p-5 flex justify-right md:block">
+          <div className="flex absolute md:relative right-0 top-1 items-center space-x-[30px]">
+              <div className="w-6 h-6 rounded-full overflow-hidden">
+                  <Image src="/images/cool-profile-picture-87h46gcobjl5e4xu.jpg" alt="Profile" width={40} height={40} />
+              </div>
+              {isOpen && <p className="text-[16px] font-medium hidden md:block text-acc-color">Anwar Magara</p>}
+          </div>
+          <div className="hidden md:block mt-3">
+              <AsideIcon link="/settings" Icon={Cog6ToothIcon} isOpen={isOpen} title={'Settings'}/>
+              <AsideIcon link="/dashboard" Icon={ArrowLeftOnRectangleIcon} isOpen={isOpen} title={'Logout'}/>
+          </div>
+      </div>
     </aside>
     )
 }

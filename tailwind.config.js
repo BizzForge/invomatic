@@ -4,6 +4,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/tailwind-datepicker-react/dist/**/*.js",
   ],
   theme: {
     extend: {
@@ -24,7 +25,10 @@ module.exports = {
       'pl-color': '#aaaaaa',
       'input-color': '#F6F7F9',
       'acc-btn': '#D9D9D9',
-      'main-bg':'#F1F1F1'
+      'acc-color-2': '#737373',
+      'main-bg':'#F1F1F1',
+      'border-lines': '#D0D0D0',
+      'success': '#23D160'
     },
   }
 }

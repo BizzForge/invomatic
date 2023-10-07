@@ -22,10 +22,10 @@ export default function Login() {
 
         <Fragment>
           <div className="py-2">
-            <InputWithIcon type="text" icon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Username or your@email.com" />
+            <InputWithIcon type="text" LeftIcon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Username or your@email.com" />
           </div>
           <div className="py-2">
-              <InputWithIcon type="password" icon={<LockClosedIcon className="h-5 w-5 text-primary" />} placeholder="At least 8 characters long" />
+              <InputWithIcon type="password" LeftIcon={<LockClosedIcon className="h-5 w-5 text-primary" />} placeholder="At least 8 characters long" />
           </div>
           <div className="w-full">
             <Link href="/login" className="pt-2 flex justify-end text-primary font-bold">Forgot Password</Link>
@@ -41,7 +41,7 @@ export default function Login() {
             <div className="border-b border-acc-color w-4/5"></div>
           </div>
 
-          <div className="w-full justify-between py2 flex">
+          <div className="w-full justify-between py2 block md:flex">
             <AuthBtn icon="/images/7123025_logo_google_g_icon.svg" onClick={handleClick} text="Signin with Google" isFirst={true}/>
             <AuthBtn icon="/images/5296499_fb_facebook_facebook logo_icon.svg" onClick={handleClick} text="Signin with Facebook" isLast={true}/>
           </div>
