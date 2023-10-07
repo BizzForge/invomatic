@@ -1,14 +1,17 @@
-import { BarsArrowDownIcon, BarsArrowUpIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { BarsArrowDownIcon, BarsArrowUpIcon, CalendarDaysIcon, EnvelopeIcon, PencilIcon } from '@heroicons/react/24/outline';
 import React, { Fragment, useState } from 'react';
+import InputWithIcon from '../inputs/input-with-icon/input-with-icon';
+import DatePicker from '../date-picker/date-picker';
 
-export default function Table({ jsonData }) {
+export default function Table({ jsonData, title }) {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [columnTitles, setColumnTitles] = useState([]);
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
-  const [itemsPerPage, setItemsPerPage] = useState(10); // Number of items per page
-  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleSelectAll = () => {
     setSelectAll(!selectAll);
@@ -71,6 +74,17 @@ export default function Table({ jsonData }) {
 
   return (
     <div className="relative mt-4 overflow-x-auto">
+      <div class="block md:flex justify-between pb-4 items-center">
+        <div className="md:pb-3"> 
+          <h5 className='mb-2 text-lg mdtext-2xl font-bold tracking-tight text-acc-color'>{title}</h5>
+        </div>
+        <div className="flex table-left">
+          <div className='mr-3'>
+            <InputWithIcon type="text" value={searchQuery} change={(e) => setSearchQuery(e.target.value)} icon={<EnvelopeIcon className="h-5 w-5 text-primary" />} placeholder="Search" />
+          </div>
+          <DatePicker Icon={CalendarDaysIcon} title={"Select Date"} color="acc-color"/>
+        </div>
+      </div>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 dark:border-gray-700">
         <thead className="text-xs text-acc-color bg-gray border-b border-border-lines">
           <tr>
@@ -85,7 +99,7 @@ export default function Table({ jsonData }) {
             {columnTitles.map((title, index) => (
               <th key={index} scope="col" className="px-6 text-[14px] py-3 cursor-pointer" onClick={() => handleSort(title)} style={{ maxWidth: '200px' }}>
                 <span className='mr-2'>{title}</span>
-                <BarsArrowDownIcon className="w-4 h-4 inline-block" />
+                <BarsArrowDownIcon strokeWidth={2} className="w-4 h-4 inline-block" />
               </th>
             ))}
             <th scope="col" className="px-6 py-3" style={{ maxWidth: '200px' }}>
@@ -94,7 +108,14 @@ export default function Table({ jsonData }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {data
+            .filter((item) =>
+              Object.values(item)
+                .join(' ')
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+            )
+            .map((item, index) => (
               <tr
                 key={item.id}
                 className={`bg-white border-hidden !text-acc-color-2 dark:bg-gray-900 dark:border-gray-700 ${

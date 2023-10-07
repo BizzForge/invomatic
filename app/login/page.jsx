@@ -41,7 +41,7 @@ export default function Login() {
             <div className="border-b border-acc-color w-4/5"></div>
           </div>
 
-          <div className="w-full justify-between py2 flex">
+          <div className="w-full justify-between py2 block md:flex">
             <AuthBtn icon="/images/7123025_logo_google_g_icon.svg" onClick={handleClick} text="Signin with Google" isFirst={true}/>
             <AuthBtn icon="/images/5296499_fb_facebook_facebook logo_icon.svg" onClick={handleClick} text="Signin with Facebook" isLast={true}/>
           </div>

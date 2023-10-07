@@ -16,7 +16,7 @@ export default function Session({children}) {
           <h1 className="mb-4 md:text-lg font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-[20px] pt-4 dark:text-white">Efficient Sales Management at Your Fingertips</h1>
           <p className="text-[16px] font-normal text-white hidden md:block lg:text-[16] pt-6">Please log in to access your account and manage sales, inventory, and customer interactions seamlessly. Our user-friendly POS system is designed to enhance your business operations and provide a superior customer experience.</p>
         </div>
-        <div className="w-full rounded-2xl bg-white h-[calc(100vh-3rem)] md:w-3/5 px-12 md:px-12 lg:px-32 py-9">
+        <div className="w-full rounded-2xl bg-white h-[calc(100vh-3rem)] md:w-3/5 px-6 md:px-12 md:px-12 lg:px-32 py-9">
           <div className="w-full">
             <Link href="/" className="hidden md:flex">
               <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />

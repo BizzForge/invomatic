@@ -1,4 +1,4 @@
-export default  function InputWithIcon({ leftIcon, rightIcon, type, placeholder, onClick, isFirst, isLast, change }) {
+export default  function InputWithIcon({ leftIcon, value, rightIcon, type, placeholder, onClick, isFirst, isLast, change }) {
     const containerClasses = `relative ${isFirst ? 'mr-0 md:mr-2' : ''} ${isLast ? 'ml-0 md:ml-2' : ''}`;
 
     return (
@@ -10,6 +10,7 @@ export default  function InputWithIcon({ leftIcon, rightIcon, type, placeholder,
                 className="pl-16 pr-16 py-2.5 placeholder-pl-color bg-input-color rounded-md w-full"
                 type={type}
                 placeholder={placeholder}
+                value={value}
                 onChange={change}
             />
 

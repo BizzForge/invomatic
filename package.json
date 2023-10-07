@@ -17,7 +17,8 @@
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "tailwind-datepicker-react": "^1.4.2"
   },
   "devDependencies": {
     "autoprefixer": "latest",
