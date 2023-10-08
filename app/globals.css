@@ -5,3 +5,42 @@
 .sidebar {
     transition: width 0.3s ease-in-out; /* You can adjust the duration and easing function as needed */
 }
+
+.react-date-picker__wrapper {
+    /* Your custom CSS styles here */
+    /* For example: */
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.react-date-picker__calendar {
+    /* Your custom styles here */
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+.react-date-picker__inputGroup {
+    display: none;
+  }
+  
+  /* Style the selected date */
+  .react-date-picker__inputGroup__input {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the calendar icon */
+  .react-date-picker__inputGroup__calendar-button {
+    background-color: #fff;
+    border: none;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  

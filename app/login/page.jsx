@@ -18,7 +18,7 @@ export default function Login() {
     <Session>
       <div className="mb-3 mt-8">
         <h1 className="font-bold mb-3 mt-0 text-4xl">Welcome Back</h1>
-        <p className="text-[16px] mb-4 text-acc-color">Don't have an account? <Link href="/signup" className="font-bold text-primary">Signup </Link></p>
+        <p className="text-[16px] mb-4 text-acc-color">Don&apos;'t have an account? <Link href="/signup" className="font-bold text-primary">Signup </Link></p>
 
         <Fragment>
           <div className="py-2">
