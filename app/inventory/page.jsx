@@ -68,7 +68,7 @@ export default function Inventory() {
             <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Inventory'} onClick={handleClick}/>
           </div>
         </div>
-        <Card>
+        <Card injectClass="transparent">
           <Table jsonData={jsonData} title={"In Stock"}/>
         </Card>
       </div>
