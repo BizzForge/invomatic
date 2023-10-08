@@ -75,16 +75,14 @@ export default function Aside() {
       
       <div className='hidden md:block md:h-[calc(100vh-45%)]'>
           {menuItems.map((menuItem, index) => (
-            <Fragment>
-              <AsideIcon
-                  key={index}
-                  link={menuItem.link}
-                  Icon={menuItem.Icon}
-                  isOpen={isOpen}
-                  title={menuItem.title}
-                  isActive={pathname === menuItem.link}
-              />
-            </Fragment>
+            <AsideIcon
+                key={index}
+                link={menuItem.link}
+                Icon={menuItem.Icon}
+                isOpen={isOpen}
+                title={menuItem.title}
+                isActive={pathname === menuItem.link}
+            />
           ))}
       </div>
 
