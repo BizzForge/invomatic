@@ -1,7 +1,8 @@
 'use client'
 
-import {useState, Fragment} from 'react'
+import {useState, Fragment, useEffect} from 'react'
 import Image from 'next/image'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Link from "next/link";
 import AsideIcon from '../aside-icon/aside-icon';
 import { ReceiptRefundIcon, InboxArrowDownIcon, MegaphoneIcon, ChartPieIcon, UserIcon, UsersIcon, BanknotesIcon, ArrowLeftOnRectangleIcon, Cog6ToothIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -9,6 +10,7 @@ import { ReceiptRefundIcon, InboxArrowDownIcon, MegaphoneIcon, ChartPieIcon, Use
 
 export default function Aside() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     const toggleMenu = () => {
       setIsOpen(!isOpen);
@@ -62,22 +64,27 @@ export default function Aside() {
         </div>
 
         <div className='md:w-full my-2 mr-4 md:ml-0 md:my-12 pb-2'>
-          <Link href='/dashboard' className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 transition-all ease-in-out`}>
+          <Link href='/sales'>
+            <div className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 transition-all ease-in-out`}>
               <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />
               {isOpen && <span className="text-lg hidden text-title-color ml-[30px] md:block font-bold transition-all ease-in-out">SwiftPOS</span>}
+            </div>
           </Link>
         </div>
       </div>
       
       <div className='hidden md:block md:h-[calc(100vh-45%)]'>
           {menuItems.map((menuItem, index) => (
-          <AsideIcon
-              key={index}
-              link={menuItem.link}
-              Icon={menuItem.Icon}
-              isOpen={isOpen}
-              title={menuItem.title}
-          />
+            <Fragment>
+              <AsideIcon
+                  key={index}
+                  link={menuItem.link}
+                  Icon={menuItem.Icon}
+                  isOpen={isOpen}
+                  title={menuItem.title}
+                  isActive={pathname === menuItem.link}
+              />
+            </Fragment>
           ))}
       </div>
 
