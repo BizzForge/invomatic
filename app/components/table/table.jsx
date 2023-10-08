@@ -87,18 +87,20 @@ export default function Table({ jsonData, title }) {
 
   return (
     <div className="relative mt-4">
-      <div class="block md:flex justify-between pb-4 items-center">
-        <div className="md:pb-3"> 
-          <h5 className='mb-2 text-lg mdtext-2xl font-bold tracking-tight text-acc-color'>{title}</h5>
-        </div>
-        <div className="flex table-left">
-          <div className='mr-3'>
-            <InputWithIcon type="text" value={searchQuery} change={(e) => setSearchQuery(e.target.value)} LeftIcon={<MagnifyingGlassIcon className="h-5 w-5 text-primary" />} placeholder="Search" />
-          </div>
-          {/* <DatePicker Icon={CalendarDaysIcon} title={"Select Date"} color="acc-color"/> */}
-        </div>
-      </div>
       {isMobile ? (
+        <Fragment>
+
+        <div class="block md:flex justify-between pb-4 items-center">
+          <div className="md:pb-3"> 
+            <h5 className='mb-2 text-lg mdtext-2xl font-bold tracking-tight text-acc-color'>{title}</h5>
+          </div>
+          <div className="flex table-left">
+            <div className='mr-3'>
+              <InputWithIcon type="text" value={searchQuery} change={(e) => setSearchQuery(e.target.value)} LeftIcon={<MagnifyingGlassIcon className="h-5 w-5 text-primary" />} placeholder="Search" />
+            </div>
+            {/* <DatePicker Icon={CalendarDaysIcon} title={"Select Date"} color="acc-color"/> */}
+          </div>
+        </div>
         <div className="grid grid-cols-1 gap-4">
           {data
           .filter((item) =>
@@ -204,6 +206,7 @@ export default function Table({ jsonData, title }) {
             </div>
           ))}
         </div>
+          </Fragment>
       ) : (
         <div className="overflow-x-auto">
           <div class="block md:flex justify-between pb-4 items-center">
