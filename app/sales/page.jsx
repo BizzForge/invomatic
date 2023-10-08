@@ -3,8 +3,9 @@ import React, {useState} from 'react'
 import Console from '../tempates/console/console'
 import Card from '../components/card/card'
 import Image from 'next/image'
-import { CalendarDaysIcon, EllipsisVerticalIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { CalendarDaysIcon, EllipsisVerticalIcon, FunnelIcon, PlusIcon } from '@heroicons/react/24/outline'
 import ButtonWithIcon from '../components/buttons/button-with-icon/button-with-icon'
+import Filter from '../components/filter/filter'
 
 export default function Sales() {
   const handleClick = () => {
@@ -12,8 +13,10 @@ export default function Sales() {
   }
   return (
     <Console>
-      <div className='flex justify-between items-center mb-4'>
+      <h3 className='font-bold text-3xl mb-7 text-title-color'>Sales</h3>
+      <div className='flex relative justify-between items-center mb-4'>
         <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Sale'} onClick={handleClick}/>
+        <Filter />
       </div>
       <div className='flex flex-wrap -mx-4'>
         <div className='w-full md:w-1/3 px-4 mb-3'>
