@@ -53,18 +53,18 @@ export default function Aside() {
     ];
 
     return (
-    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-[transparent] z-50 flex md:block md:bg-white p-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg`}>
+    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-[transparent] z-50 flex md:block md:bg-white px-2 py-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg`}>
       <div className='flex md:block flex-row-reverse'>
         <div className='md:w-full my-1 md:my-4 pb-2'>
-          <a onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-left' : 'justify-left'} cursor-pointer`}>
+          <a onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 cursor-pointer`}>
             {isOpen ? <XMarkIcon strokeWidth={2} className="w-6 h-6 text-acc-color"/> : <Bars3CenterLeftIcon strokeWidth={2} className="w-6 h-6 text-acc-color"/>}
           </a>
         </div>
 
         <div className='md:w-full my-2 mr-4 md:ml-0 md:my-12 pb-2'>
-          <Link href='/dashboard' className={`flex w-full ${!isOpen ? 'justify-left' : 'justify-left'} transition-all ease-in-out`}>
+          <Link href='/dashboard' className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 transition-all ease-in-out`}>
               <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />
-              {isOpen && <span className="text-lg text-title-color ml-[30px] md:block font-bold transition-all ease-in-out">SwiftPOS</span>}
+              {isOpen && <span className="text-lg hidden text-title-color ml-[30px] md:block font-bold transition-all ease-in-out">SwiftPOS</span>}
           </Link>
         </div>
       </div>
@@ -81,8 +81,8 @@ export default function Aside() {
           ))}
       </div>
 
-      <div className="relative md:absolute md:bottom-0 md:left-0 w-full md:p-5 flex justify-right md:block">
-          <div className="flex absolute md:relative right-0 top-1 items-center space-x-[30px]">
+      <div className="relative md:absolute md:bottom-0 md:left-0 w-full md:px-2.5 md:py-5 flex justify-right md:block">
+          <div className={`flex absolute md:relative right-0 top-1 ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 items-center space-x-[30px]`}>
               <div className="w-6 h-6 rounded-full overflow-hidden">
                   <Image src="/images/cool-profile-picture-87h46gcobjl5e4xu.jpg" alt="Profile" width={40} height={40} />
               </div>
