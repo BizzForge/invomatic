@@ -3,7 +3,7 @@ import { FunnelIcon } from '@heroicons/react/24/outline';
 import React, { Fragment, useState } from 'react'
 
 export default function Filter() {
-    const [isOpen, setIsOpen] =useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const toggleFilter = () => {
         setIsOpen(!isOpen);
     }
