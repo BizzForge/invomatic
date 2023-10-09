@@ -1,6 +1,5 @@
 'use client'
-
-import {useState, Fragment, useEffect} from 'react'
+import React, {useState, Fragment, useEffect} from 'react'
 import Image from 'next/image'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Link from "next/link";
