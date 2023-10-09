@@ -59,7 +59,9 @@ export default function Inventory() {
   }
   return (
     <Console>
-      <div className="p-5">
+      <h3 className='font-bold text-3xl mb-7 text-title-color'>Inventory</h3>
+
+      <div className="p-0">
         <div className='flex justify-end items-center pb-5'>
           <div className='px-1'>
             <Button text="Export CSV" border={true}/>
