@@ -1,7 +1,7 @@
 import React from 'react'
-import Console from '../tempates/console/console'
+import Console from '../../tempates/console/console'
 
-export default function NewInventory() {
+export default function New() {
   return (
     <Console>
         New Inventory page created

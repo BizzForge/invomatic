@@ -5,7 +5,7 @@ import Card from '../components/card/card'
 import Image from 'next/image'
 import { CalendarDaysIcon, EllipsisVerticalIcon, PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import ButtonWithIcon from '../components/buttons/button-with-icon/button-with-icon'
-// import Filter from '../components/filter/filter'
+import Filter from '../components/filter/filter'
 import Link from 'next/link'
 
 export default function Sales() {
@@ -17,7 +17,7 @@ export default function Sales() {
       <h3 className='text-title-color text-3xl mb-10 font-bold'>Sales</h3>
       <div className='flex justify-between items-center mb-4'>
         <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Sale'} onClick={handleClick}/>
-        {/* <Filter /> */}
+        <Filter />
       </div>
       <div className='flex flex-wrap -mx-4'>
 
@@ -57,7 +57,7 @@ export default function Sales() {
               </div>
               <div className='p-3 bg-main-bg cursor-pointer rounded'>
                 <EllipsisVerticalIcon className="h-5 w-5 text-acc-color"/>
-                <div className='bg-white p-5 absolute rounded-lg shadow-xl right-0 top-14 w-1/2'>
+                <div className='bg-white p-5 absolute transition transition-["height"] duration-500 ease-out rounded-lg shadow-xl right-0 top-14 w-1/2'>
                   <Link href="/" className='flex py-3 justify-between items-center hover:bg-main-bg px-4 rounded-lg hover:text-primary'>
                     <p className='text-acc-color'>Edit</p>
                     <PencilIcon className="h-5 w-5 text-acc-color"/>
