@@ -59,7 +59,7 @@ export default function Inventory() {
   }
   return (
     <Console>
-      <div className="p-5">
+      <div className="p-2 md:p-7">
         <div className='flex justify-end items-center pb-5'>
           <div className='px-1'>
             <Button text="Export CSV" border={true}/>

@@ -7,7 +7,7 @@ export default function Console({children}) {
       <div className='block md:flex'>
         <Aside />
 
-        <div className='w-full p-2 md:p-7 overflow-auto'>
+        <div className='w-full overflow-auto'>
           {children}
         </div>
       </div>
