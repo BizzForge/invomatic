@@ -17,7 +17,7 @@ export default function Sales() {
       <div className='p-2 md:p-7'>
         <h3 className='text-title-color text-3xl mb-10 font-bold'>Sales</h3>
         <div className='flex justify-between items-center mb-4'>
-          <ButtonWithIcon Icon={PlusIcon} href="/inventory/new" text={'New Sale'} onClick={handleClick}/>
+          <ButtonWithIcon Icon={PlusIcon} href="/pos" text={'New Sale'} onClick={handleClick}/>
           <Filter />
         </div>
         <div className='flex flex-wrap -mx-4'>

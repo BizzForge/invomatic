@@ -26,31 +26,31 @@ export default function Aside() {
           Icon: InboxArrowDownIcon,
           title: 'Inventory Management',
         },
-        {
-          link: '/dashboard',
-          Icon: ChartPieIcon,
-          title: 'Analytics',
-        },
-        {
-          link: '/dashboard',
-          Icon: UserIcon,
-          title: 'Customer Management',
-        },
-        {
-          link: '/dashboard',
-          Icon: MegaphoneIcon,
-          title: 'Promos',
-        },
-        {
-          link: '/dashboard',
-          Icon: UsersIcon,
-          title: 'Supplier Management',
-        },
-        {
-          link: '/dashboard',
-          Icon: BanknotesIcon,
-          title: 'Financial Management',
-        },
+        // {
+        //   link: '/dashboard',
+        //   Icon: ChartPieIcon,
+        //   title: 'Analytics',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: UserIcon,
+        //   title: 'Customer Management',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: MegaphoneIcon,
+        //   title: 'Promos',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: UsersIcon,
+        //   title: 'Supplier Management',
+        // },
+        // {
+        //   link: '/dashboard',
+        //   Icon: BanknotesIcon,
+        //   title: 'Financial Management',
+        // },
     ];
 
     return (
