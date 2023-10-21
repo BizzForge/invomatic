@@ -109,6 +109,90 @@ export default function PosCategory() {
             "price": 5200,
             "quantity": 1,
             "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Johnnie Walker Black Label",
+            "price": 4500,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Bushmills Original",
+            "price": 3600,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Wild Turkey 101",
+            "price": 4200,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Evan Williams Single Barrel",
+            "price": 5500,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Knob Creek Bourbon",
+            "price": 4900,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Jack Daniel's Single Barrel",
+            "price": 5800,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Belvedere",
+            "price": 3800,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Absolut",
+            "price": 3200,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Smirnoff",
+            "price": 2800,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Tito's Handmade Vodka",
+            "price": 3600,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Ciroc",
+            "price": 4200,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Ketel One Citroen",
+            "price": 3400,
+            "quantity": 1,
+            "subtitle": "750ml"
         }
     ]
 

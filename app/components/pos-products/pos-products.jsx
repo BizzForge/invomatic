@@ -107,6 +107,90 @@ export default function PosProduct() {
             "price": 5200,
             "quantity": 1,
             "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Johnnie Walker Black Label",
+            "price": 4500,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Bushmills Original",
+            "price": 3600,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Wild Turkey 101",
+            "price": 4200,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Evan Williams Single Barrel",
+            "price": 5500,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Knob Creek Bourbon",
+            "price": 4900,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Jack Daniel's Single Barrel",
+            "price": 5800,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Belvedere",
+            "price": 3800,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Absolut",
+            "price": 3200,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Smirnoff",
+            "price": 2800,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Tito's Handmade Vodka",
+            "price": 3600,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Ciroc",
+            "price": 4200,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Ketel One Citroen",
+            "price": 3400,
+            "quantity": 1,
+            "subtitle": "750ml"
         }
     ]);
 
@@ -146,35 +230,37 @@ export default function PosProduct() {
     }
 
     return (
-      <div className="flex pt-8 flex-wrap -mx-2">
-        {filteredProducts.length === 0 ? (
-          <p>Choose a category.</p>
-        ) : (
-          filteredProducts.map((product, index) => (
-            <div key={index} className="w-full cursor-pointer sm:w-1/2 md:w-1/2 lg-w-1/4 px-2 mb-4">
-              <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
-                <div>
-                  <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
-                  <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-[12px] text-acc-color-2 flex items-center">
-                    <span className="mr-2">{product.subtitle}</span>
-                  </p>
-                  <div className="flex text-[12px] items-center">
-                    <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                      <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                    </a>
-                    <p className="text-[14px] px-3">{product.quantity}</p>
-                    <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                      <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                    </a>
+        <div className="flex pt-8 flex-wrap -mx-2">
+          {filteredProducts.length === 0 ? (
+            <p>Choose a category.</p>
+          ) : (
+            <div className="grid grid-cols-4 gap-4">
+              {filteredProducts.map((product, index) => (
+                <div key={index} className="cursor-pointer">
+                  <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
+                    <div>
+                      <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
+                      <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
+                    </div>
+                    <div className="flex justify-between">
+                      <p className="text-[12px] text-acc-color-2 flex items-center">
+                        <span className="mr-2">{product.subtitle}</span>
+                      </p>
+                      <div className="flex text-[12px] items-center">
+                        <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                          <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                        </a>
+                        <p className="text-[14px] px-3">{product.quantity}</p>
+                        <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                          <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))
-        )}
-      </div>
+          )}
+        </div>
     );
 }
