@@ -1,21 +1,135 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function PosProduct() {
     const [products, setProducts] = useState([
         {
-            title: "Grey Goose",
-            subtitle: 750,
-            price: 3240,
-            quantity: 1 
+            "category": "Whiskey",
+            "productTitle": "Jameson",
+            "price": 3800,
+            "quantity": 1,
+            "subtitle": "750ml"
         },
         {
-            title: "Grey Goose",
-            subtitle: 750,
-            price: 3240,
-            quantity: 1
+            "category": "Vodka",
+            "productTitle": "Grey Goose",
+            "price": 3500,
+            "quantity": 1,
+            "subtitle": "700ml"
         },
+        {
+            "category": "Rum",
+            "productTitle": "Captain Morgan Spiced Rum",
+            "price": 2900,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Gin",
+            "productTitle": "Hendrick's Gin",
+            "price": 4200,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Tequila",
+            "productTitle": "Jose Cuervo Gold",
+            "price": 3100,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Wine",
+            "productTitle": "Chardonnay",
+            "price": 2500,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Beer",
+            "productTitle": "Heineken",
+            "price": 2400,
+            "quantity": 1,
+            "subtitle": "500ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Glenfiddich 12 Year",
+            "price": 4800,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Vodka",
+            "productTitle": "Ketel One",
+            "price": 3200,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Rum",
+            "productTitle": "Malibu Coconut Rum",
+            "price": 2700,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Gin",
+            "productTitle": "Tanqueray",
+            "price": 3900,
+            "quantity": 1,
+            "subtitle": "700ml"
+        },
+        {
+            "category": "Tequila",
+            "productTitle": "Don Julio Blanco",
+            "price": 4600,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Wine",
+            "productTitle": "Merlot",
+            "price": 2600,
+            "quantity": 1,
+            "subtitle": "750ml"
+        },
+        {
+            "category": "Beer",
+            "productTitle": "Stella Artois",
+            "price": 2500,
+            "quantity": 1,
+            "subtitle": "500ml"
+        },
+        {
+            "category": "Whiskey",
+            "productTitle": "Laphroaig 10 Year",
+            "price": 5200,
+            "quantity": 1,
+            "subtitle": "750ml"
+        }
     ]);
+
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [title, setTitle] = useState("");
+
+    useEffect(() => {
+        const handleTitleChange = (e) => {
+            setTitle(e.detail.title);
+        };
+
+        window.addEventListener('getTitle', handleTitleChange);
+
+        return () => {
+            window.removeEventListener('getTitle', handleTitleChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        const filtered = products.filter(product => product.category === title);
+        setFilteredProducts(filtered);
+    }, [title, products]);
+
 
     const qtyIncrement = (index) => {
         const updatedProducts = [...products];
@@ -33,30 +147,34 @@ export default function PosProduct() {
 
     return (
       <div className="flex pt-8 flex-wrap -mx-2">
-        {products.map((product, index) => (
-          <div key={index} className="w-full cursor-pointer sm:w-1/2 md:w-1/2 lg:w-1/4 px-2 mb-4">
-            <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
+        {filteredProducts.length === 0 ? (
+          <p>Choose a category.</p>
+        ) : (
+          filteredProducts.map((product, index) => (
+            <div key={index} className="w-full cursor-pointer sm:w-1/2 md:w-1/2 lg-w-1/4 px-2 mb-4">
+              <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                 <div>
-                    <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.title}</h4>
-                    <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
+                  <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
+                  <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
                 </div>
                 <div className="flex justify-between">
-                    <p className="text-[12px] text-acc-color-2 flex items-center"> 
-                        <span className="mr-2">{product.subtitle}</span>
-                    </p>
-                    <div className="flex text-[12px] items-center">
-                        <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                            <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                        </a>
-                        <p className="text-[14px] px-3">{product.quantity}</p>
-                        <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                            <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                        </a>
-                    </div>
+                  <p className="text-[12px] text-acc-color-2 flex items-center">
+                    <span className="mr-2">{product.subtitle}</span>
+                  </p>
+                  <div className="flex text-[12px] items-center">
+                    <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                      <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                    </a>
+                    <p className="text-[14px] px-3">{product.quantity}</p>
+                    <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                      <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     );
 }

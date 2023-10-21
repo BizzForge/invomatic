@@ -17,12 +17,12 @@ export default function Pos() {
     }
     return (
         <Console>
-            <div class="relative block md:flex">
-                <div class={`w-full lg:w-[75%] ${cartOpen ? "hidden" : "block"} block p-2 md:p-7`}>
+            <div className="relative block md:flex">
+                <div className={`w-full lg:w-[75%] ${cartOpen ? "hidden" : "block"} block p-2 md:p-7`}>
                     <PosCategory/>
                     <PosProduct/>
                 </div>
-                <div class={`${cartOpen ? "block" : "hidden"} lg:block sm:w-full md:w-[25%] h-screen bg-white p-4`}>
+                <div className={`${cartOpen ? "block" : "hidden"} lg:block sm:w-full md:w-[25%] h-screen bg-white p-4`}>
                     <div className='flex justify-between py-5 items-center'>
                         <h4 className='font-bold text-[20px]'>Customer Orders</h4>
                         <a className='cursor-pointer'><TrashIcon className="h-5 w-5 text-acc-color"/></a>
