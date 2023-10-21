@@ -24,33 +24,33 @@ export default function Aside() {
         {
           link: '/inventory',
           Icon: InboxArrowDownIcon,
-          title: 'Inventory Management',
+          title: 'Inventory',
         },
-        // {
-        //   link: '/dashboard',
-        //   Icon: ChartPieIcon,
-        //   title: 'Analytics',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: UserIcon,
-        //   title: 'Customer Management',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: MegaphoneIcon,
-        //   title: 'Promos',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: UsersIcon,
-        //   title: 'Supplier Management',
-        // },
-        // {
-        //   link: '/dashboard',
-        //   Icon: BanknotesIcon,
-        //   title: 'Financial Management',
-        // },
+        {
+          link: '/analytics',
+          Icon: ChartPieIcon,
+          title: 'Analytics',
+        },
+        {
+          link: '/customers',
+          Icon: UserIcon,
+          title: 'Customer',
+        },
+        {
+          link: '/promos',
+          Icon: MegaphoneIcon,
+          title: 'Promos',
+        },
+        {
+          link: '/suppliers',
+          Icon: UsersIcon,
+          title: 'Supplier',
+        },
+        {
+          link: '/finance',
+          Icon: BanknotesIcon,
+          title: 'Financial',
+        },
     ];
 
     return (

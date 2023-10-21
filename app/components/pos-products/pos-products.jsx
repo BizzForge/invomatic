@@ -220,7 +220,7 @@ export default function PosProduct() {
         updatedProducts[index].quantity += 1;
         setProducts(updatedProducts);
     }
-
+    
     const qtyDecrement = (index) => {
         const updatedProducts = [...products];
         if (updatedProducts[index].quantity > 1) {
@@ -232,35 +232,35 @@ export default function PosProduct() {
     return (
         <div className="flex pt-8 flex-wrap -mx-2">
           {filteredProducts.length === 0 ? (
-            <p>Choose a category.</p>
-          ) : (
-            <div className="grid grid-cols-4 gap-4">
-              {filteredProducts.map((product, index) => (
-                <div key={index} className="cursor-pointer">
-                  <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
-                    <div>
-                      <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
-                      <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
-                    </div>
-                    <div className="flex justify-between">
-                      <p className="text-[12px] text-acc-color-2 flex items-center">
-                        <span className="mr-2">{product.subtitle}</span>
-                      </p>
-                      <div className="flex text-[12px] items-center">
-                        <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                          <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                        </a>
-                        <p className="text-[14px] px-3">{product.quantity}</p>
-                        <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
-                          <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                <p className="text-acc-color text-center w-full">Choose a category.</p>
+            ) : (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {filteredProducts.map((product, index) => (
+                        <div key={index} className="cursor-pointer">
+                            <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
+                                <div>
+                                    <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
+                                    <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
+                                </div>
+                                <div className="flex justify-between">
+                                    <p className="text-[12px] text-acc-color-2 flex items-center">
+                                        <span className="mr-2">{product.subtitle}</span>
+                                    </p>
+                                    <div className="flex text-[12px] items-center">
+                                        <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                                            <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                                        </a>
+                                        <p className="text-[14px] px-3">{product.quantity}</p>
+                                        <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                                            <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              ))}
-            </div>
-          )}
+            )}
         </div>
     );
 }
