@@ -195,6 +195,7 @@ export default function PosProduct() {
     ]);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [selectedProducts, setSelectedProducts] = useState([]);
     const [title, setTitle] = useState("");
 
     useEffect(() => {
@@ -214,6 +215,16 @@ export default function PosProduct() {
         setFilteredProducts(filtered);
     }, [title, products]);
 
+    const handleCartProduct = (product) => {
+        const updateProduct = [...selectedProducts, product];
+        setSelectedProducts(updateProduct);
+
+        const cartUpdateEvent = new CustomEvent('addToCart', {
+            detail: {product: updateProduct},
+        });
+        
+        window.dispatchEvent(cartUpdateEvent);
+    }
 
     const qtyIncrement = (index) => {
         const updatedProducts = [...products];
@@ -236,7 +247,7 @@ export default function PosProduct() {
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => (
-                        <div key={index} className="cursor-pointer">
+                        <div key={index} className="cursor-pointer" onClick={() => handleCartProduct(product)}>
                             <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                                 <div>
                                     <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
