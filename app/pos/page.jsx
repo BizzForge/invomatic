@@ -12,7 +12,7 @@ export default function Pos() {
     return (
         <Console>
             <div className="relative block md:flex">
-                <div className={`w-full lg:w-[70%] block p-2 md:p-7`}>
+                <div className={`w-full sm:w-[68.8%] block p-2 md:p-7 md:mr-7`}>
                     <PosCategory />
                     <PosProduct />
                 </div>

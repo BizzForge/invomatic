@@ -26,35 +26,35 @@ export default function Aside() {
           Icon: InboxArrowDownIcon,
           title: 'Inventory',
         },
-        // {
-        //   link: '/analytics',
-        //   Icon: ChartPieIcon,
-        //   title: 'Analytics',
-        // },
-        // {
-        //   link: '/customers',
-        //   Icon: UserIcon,
-        //   title: 'Customer',
-        // },
-        // {
-        //   link: '/promos',
-        //   Icon: MegaphoneIcon,
-        //   title: 'Promos',
-        // },
-        // {
-        //   link: '/suppliers',
-        //   Icon: UsersIcon,
-        //   title: 'Supplier',
-        // },
-        // {
-        //   link: '/finance',
-        //   Icon: BanknotesIcon,
-        //   title: 'Financial',
-        // },
+        {
+          link: '/analytics',
+          Icon: ChartPieIcon,
+          title: 'Analytics',
+        },
+        {
+          link: '/customers',
+          Icon: UserIcon,
+          title: 'Customer',
+        },
+        {
+          link: '/promos',
+          Icon: MegaphoneIcon,
+          title: 'Promos',
+        },
+        {
+          link: '/suppliers',
+          Icon: UsersIcon,
+          title: 'Supplier',
+        },
+        {
+          link: '/finance',
+          Icon: BanknotesIcon,
+          title: 'Financial',
+        },
     ];
 
     return (
-    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-[transparent] z-50 flex md:block md:bg-white px-2 py-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg`}>
+    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-[transparent] z-50 flex md:block md:bg-white px-2 py-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg fixed`}>
       <div className='flex md:block flex-row-reverse'>
         <div className='md:w-full my-1 md:my-4 pb-2'>
           <a onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 cursor-pointer`}>

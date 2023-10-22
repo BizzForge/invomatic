@@ -29,9 +29,7 @@ export default function Cart() {
         const addCartProducts = (e) => {
             const productToAdd = e.detail.product;            
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
-
-            console.log(productToAdd) 
-            setCartProducts(objectsWithAggregatedQuantity);
+            setCartProducts(objectsWithAggregatedQuantity.reverse());
         };
     
         window.addEventListener('addToCart', addCartProducts);
@@ -84,13 +82,13 @@ export default function Cart() {
     };
 
     return (
-        <div className={`lg:block md:w-full lg:w-[30%] h-screen bg-white`}>
+        <div className={`lg:block w-full sm:w-[30%] fixed right-0 h-screen bg-white`}>
             <div className='flex justify-between py-5 px-10 items-center'>
                 <h4 className='font-bold text-2xl'>Customer Orders</h4>
-                <a className='cursor-pointer p-2' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></a>
+                <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
             </div>
-
-            <div className='h-2/5 overflow-y-auto'>
+ 
+            <div className='h-2/5 no-scrollbar overflow-y-auto scroll-smooth'>
                 <ul className="max-w-md divide-y divide-acc-btn p-5 px-10">
                     {cartProducts.length === 0 ? (<p className='w-full text-center text-acc-btn'>cart is empty</p>) : (
                         Array.isArray(cartProducts) && cartProducts.map((product, index) => (
@@ -135,12 +133,12 @@ export default function Cart() {
                                         Ksh. {product.updatedPrice ? product.updatedPrice : product.price} 
                                     </div>
                                     <div className='flex gap-2'>
-                                        <a
+                                        <button
                                             className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute'
                                             onClick={() => removeCartProduct(product)}
                                         >
                                             <XMarkIcon className="h-5 w-5 text-acc-color hover:text-danger" />
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </li>
