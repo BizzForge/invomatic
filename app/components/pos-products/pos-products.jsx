@@ -284,15 +284,15 @@ export default function PosProduct() {
                                     <p className="text-[12px] text-acc-color-2 flex items-center">
                                         <span className="mr-2">{product.subtitle}</span>
                                     </p>
-                                    <div className="flex text-[12px] items-center">
-                                        <a onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
+                                    {/* <div className="flex text-[12px] items-center">
+                                        <button onClick={() => qtyIncrement(index)} className="bg-acc-btn p-1 rounded-sm">
                                             <PlusIcon className="h-5 w-5 text-acc-color text-[8px]" />
-                                        </a>
+                                        </button>
                                         <p className="text-[14px] px-3">{product.quantity}</p>
                                         <a onClick={() => qtyDecrement(index)} className="bg-acc-btn p-1 rounded-sm">
                                             <MinusIcon className="h-5 w-5 text-acc-color text-[8px]" />
                                         </a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </button>
