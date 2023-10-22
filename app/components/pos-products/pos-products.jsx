@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function PosProduct() {
     const [products, setProducts] = useState([
         {
+            "id": 1,
             "category": "Whiskey",
             "productTitle": "Jameson",
             "price": 3800,
@@ -11,6 +12,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 2,
             "category": "Vodka",
             "productTitle": "Grey Goose",
             "price": 3500,
@@ -18,6 +20,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 3,
             "category": "Rum",
             "productTitle": "Captain Morgan Spiced Rum",
             "price": 2900,
@@ -25,6 +28,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 4,
             "category": "Gin",
             "productTitle": "Hendrick's Gin",
             "price": 4200,
@@ -32,6 +36,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 5,
             "category": "Tequila",
             "productTitle": "Jose Cuervo Gold",
             "price": 3100,
@@ -39,6 +44,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 6,
             "category": "Wine",
             "productTitle": "Chardonnay",
             "price": 2500,
@@ -46,6 +52,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 7,
             "category": "Beer",
             "productTitle": "Heineken",
             "price": 2400,
@@ -53,6 +60,7 @@ export default function PosProduct() {
             "subtitle": "500ml"
         },
         {
+            "id": 8,
             "category": "Whiskey",
             "productTitle": "Glenfiddich 12 Year",
             "price": 4800,
@@ -60,6 +68,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 9,
             "category": "Vodka",
             "productTitle": "Ketel One",
             "price": 3200,
@@ -67,6 +76,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 10,
             "category": "Rum",
             "productTitle": "Malibu Coconut Rum",
             "price": 2700,
@@ -74,6 +84,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 11,
             "category": "Gin",
             "productTitle": "Tanqueray",
             "price": 3900,
@@ -81,6 +92,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 12,
             "category": "Tequila",
             "productTitle": "Don Julio Blanco",
             "price": 4600,
@@ -88,6 +100,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 13,
             "category": "Wine",
             "productTitle": "Merlot",
             "price": 2600,
@@ -95,6 +108,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 14,
             "category": "Beer",
             "productTitle": "Stella Artois",
             "price": 2500,
@@ -102,6 +116,7 @@ export default function PosProduct() {
             "subtitle": "500ml"
         },
         {
+            "id": 15,
             "category": "Whiskey",
             "productTitle": "Laphroaig 10 Year",
             "price": 5200,
@@ -109,6 +124,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 16,
             "category": "Whiskey",
             "productTitle": "Johnnie Walker Black Label",
             "price": 4500,
@@ -116,6 +132,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 17,
             "category": "Whiskey",
             "productTitle": "Bushmills Original",
             "price": 3600,
@@ -123,6 +140,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 18,
             "category": "Whiskey",
             "productTitle": "Wild Turkey 101",
             "price": 4200,
@@ -130,6 +148,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 19,
             "category": "Whiskey",
             "productTitle": "Evan Williams Single Barrel",
             "price": 5500,
@@ -137,6 +156,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 20,
             "category": "Whiskey",
             "productTitle": "Knob Creek Bourbon",
             "price": 4900,
@@ -144,6 +164,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 21,
             "category": "Whiskey",
             "productTitle": "Jack Daniel's Single Barrel",
             "price": 5800,
@@ -151,6 +172,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 22,
             "category": "Vodka",
             "productTitle": "Belvedere",
             "price": 3800,
@@ -158,6 +180,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 23,
             "category": "Vodka",
             "productTitle": "Absolut",
             "price": 3200,
@@ -165,6 +188,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 24,
             "category": "Vodka",
             "productTitle": "Smirnoff",
             "price": 2800,
@@ -172,6 +196,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 25,
             "category": "Vodka",
             "productTitle": "Tito's Handmade Vodka",
             "price": 3600,
@@ -179,6 +204,7 @@ export default function PosProduct() {
             "subtitle": "750ml"
         },
         {
+            "id": 26,
             "category": "Vodka",
             "productTitle": "Ciroc",
             "price": 4200,
@@ -186,6 +212,7 @@ export default function PosProduct() {
             "subtitle": "700ml"
         },
         {
+            "id": 27,
             "category": "Vodka",
             "productTitle": "Ketel One Citroen",
             "price": 3400,
