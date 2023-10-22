@@ -16,6 +16,9 @@ export default function Pos() {
         for (const obj of array) {
             if (idMap.hasOwnProperty(obj.id)) {
                 idMap[obj.id].quantity += obj.quantity;
+                idMap[obj.id].originalPrice = obj.originalPrice;
+                let quantity = idMap[obj.id].quantity;
+                idMap[obj.id].updatedPrice = obj.price * quantity;
             } else {
                 idMap[obj.id] = { ...obj };
             }
@@ -43,7 +46,7 @@ export default function Pos() {
           return 0;
         }
       
-        const totalPrice = cartProducts.reduce((total, product) => total + product.price, 0);
+        const totalPrice = cartProducts.reduce((total, product) => total +  product.updatedPrice ? product.updatedPrice : product.price, 0);
       
         return totalPrice;
     };
@@ -132,7 +135,7 @@ export default function Pos() {
                                                 </div>
                                             )}
                                             <div className="inline-flex items-center text-base font-semibold text-acc-color">
-                                                Ksh. {product.price} 
+                                                Ksh. {product.updatedPrice ? product.updatedPrice : product.price} 
                                             </div>
                                             <div className='flex gap-2'>
                                                 <a className='cursor-pointer p-2' onClick={() => removeCartProduct(product)}>
