@@ -88,8 +88,8 @@ export default function Cart() {
                 <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
             </div>
  
-            <div className='h-2/5 no-scrollbar overflow-y-auto scroll-smooth'>
-                <ul className="max-w-md divide-y divide-acc-btn p-5 px-10">
+            <div className='h-2/5 no-scrollbar overflow-y-auto scroll-smooth px-10'>
+                <ul className="max-w-md divide-y divide-acc-btn">
                     {cartProducts.length === 0 ? (<p className='w-full text-center text-acc-btn'>cart is empty</p>) : (
                         Array.isArray(cartProducts) && cartProducts.map((product, index) => (
                             <li className="sm:py-4" key={index}>
@@ -162,7 +162,7 @@ export default function Cart() {
                 </div>
             </div>
 
-            <div className='px-16'>
+            <div className='px-10'>
                 <h4 className='font-bold text-2xl'>Payment Method</h4>
                 <div className='flex gap-3 mt-3'>
                     <a className='cursor-pointer text-center'>
@@ -181,7 +181,7 @@ export default function Cart() {
                 </div>
             </div>
 
-            <div className='px-16 flex gap-2 pt-5'>
+            <div className='px-10 flex gap-2 pt-5'>
                 <button type="button" className="text-acc-color bg-acc-btn hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Put on hold</button>
                 <button type="button" className="text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Proceed</button>
             </div>

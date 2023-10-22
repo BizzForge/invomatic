@@ -274,11 +274,11 @@ export default function PosProduct() {
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => (
-                        <div key={index} className="cursor-pointer" onClick={() => handleCartProduct(product)}>
+                        <button key={index} className="cursor-pointer" onClick={() => handleCartProduct(product)}>
                             <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                                 <div>
-                                    <h4 className="text-[18px] text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
-                                    <p className="text-[12px] text-acc-color-2 font-light">Ksh. {product.price}</p>
+                                    <h4 className="text-[18px] text-left text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
+                                    <p className="text-[12px] text-left text-acc-color-2 font-light">Ksh. {product.price}</p>
                                 </div>
                                 <div className="flex justify-between">
                                     <p className="text-[12px] text-acc-color-2 flex items-center">
@@ -295,7 +295,7 @@ export default function PosProduct() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     ))}
                 </div>
             )}
