@@ -28,7 +28,9 @@ module.exports = {
       'acc-color-2': '#737373',
       'main-bg':'#F1F1F1',
       'border-lines': '#D0D0D0',
-      'success': '#23D160'
+      'success': '#23D160',
+      'danger': '#ff3860',
+      'danger-mute': '#feecf0',
     },
   }
 }
