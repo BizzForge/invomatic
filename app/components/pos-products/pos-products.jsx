@@ -272,16 +272,16 @@ export default function PosProduct() {
           {filteredProducts.length === 0 ? (
                 <p className="text-acc-color text-center w-full">Choose a category.</p>
             ) : (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="w-full px-2 grid grid-cols-2 md:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => (
                         <button key={index} className="cursor-pointer" onClick={() => handleCartProduct(product)}>
                             <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                                 <div>
-                                    <h4 className="text-[18px] text-left text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
+                                    <h4 className="text-[16px] sm:text-[18px] text-left text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>
                                     <p className="text-[12px] text-left text-acc-color-2 font-light">Ksh. {product.price}</p>
                                 </div>
                                 <div className="flex justify-between">
-                                    <p className="text-[12px] text-acc-color-2 flex items-center">
+                                    <p className="text-[12px] text-acc-color-2 flex w-full items-center">
                                         <span className="mr-2">{product.subtitle}</span>
                                     </p>
                                     {/* <div className="flex text-[12px] items-center">
