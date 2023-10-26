@@ -54,7 +54,7 @@ export default function Aside() {
     ];
 
     return (
-    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-white z-50 flex md:block md:bg-white px-2 py-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg fixed`}>
+    <aside className={`w-full ${isOpen ? 'md:w-80 transition-all ease-in-out' : 'md:w-16 transition-all ease-in-out' } overflow-hidden bg-white z-40 flex md:block md:bg-white px-2 py-5 h-20 md:h-[calc(100vh)] transform md:shadow-lg fixed`}>
       <div className='flex md:block flex-row-reverse'>
         <div className='md:w-full my-1 md:my-4 pb-2'>
           <a onClick={toggleMenu} className={`flex w-full ${!isOpen ? 'justify-center' : 'justify-left'} md:px-2.5 cursor-pointer`}>

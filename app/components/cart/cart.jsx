@@ -7,6 +7,7 @@ export default function Cart(cartOpen) {
     const taxRate = 0.16;
     const [cartProducts, setCartProducts] = useState([]);
     const [editableIndex, setEditableIndex] = useState(-1);
+    const [paymentMethod, setPaymentMethod] = useState('cash');
 
     const addQuantityForDuplicateIDs = (array) => {
         const idMap = {};
@@ -33,10 +34,11 @@ export default function Cart(cartOpen) {
     }, []);
 
     useEffect(() => {
-        const addCartProducts = (e) => {
+        const addCartProducts = async (e) => {
             const productToAdd = e.detail.product;
+
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
-            setCartProducts(objectsWithAggregatedQuantity.reverse());
+            setCartProducts(objectsWithAggregatedQuantity);
             
             localStorage.setItem('cartProducts', JSON.stringify([...objectsWithAggregatedQuantity]));
         };
@@ -65,12 +67,12 @@ export default function Cart(cartOpen) {
     };
 
     const removeCartProduct = (productToRemove) => {
-        const updatedCart = cartProducts.filter(product => product !== productToRemove);
+        const updatedCart = cartProducts.filter((product) => product !== productToRemove);
+
+        setCartProducts(updatedCart);
 
         const updatedCartJSON = JSON.stringify(updatedCart);
         localStorage.setItem('cartProducts', updatedCartJSON);
-    
-        setCartProducts(updatedCart);
     }
 
     const handleStartEdit = (index) => {
@@ -93,8 +95,37 @@ export default function Cart(cartOpen) {
         localStorage.removeItem('cartProducts');
     };
 
+    const proceedCart = async () => {
+        switch (paymentMethod) {
+            case 'debit':
+                const debitMethod = new CustomEvent('paymentMethod', {
+                    detail: {   
+                        method: paymentMethod,
+                        display: true,
+                    }
+                })
+
+                window.dispatchEvent(debitMethod)
+            break;
+
+            default:
+                const cashMethod = new CustomEvent('paymentMethod', {
+                    detail: {   
+                        method: paymentMethod,
+                        display: true,
+                    }
+                })
+
+                window.dispatchEvent(cashMethod)
+        }
+    }
+
+    const setMethod = method => {
+        setPaymentMethod(method)
+    }
+
     return (
-        <div className={`lg:block w-full md:w-[30%] overflow-scroll fixed right-0 h-screen bg-white`}>
+        <div className={`lg:block w-full md:w-[30%] fixed right-0 h-screen bg-white`}>
             <div className='flex justify-between py-5 px-8 md:px-10 items-center'>
                 <h4 className='font-bold text-2xl'>Customer Orders</h4>
                 <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
@@ -177,25 +208,25 @@ export default function Cart(cartOpen) {
             <div className='px-8 md:px-10'>
                 <h4 className='font-bold text-2xl'>Payment Method</h4>
                 <div className='flex gap-3 mt-3'>
-                    <a className='cursor-pointer text-center'>
+                    <button onClick={() => setMethod('cash')} className='cursor-pointer text-center'>
                         <div className='p-4 bg-acc-btn rounded-lg  hover:bg-primary hover:text-white'>
                             <BanknotesIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Cash</p>
-                    </a>
+                    </button>
 
-                    <a className='cursor-pointer text-center'>
+                    <button onClick={() => setMethod('debit')} className='cursor-pointer text-center'>
                         <div className='p-4 bg-acc-btn rounded-lg hover:bg-primary hover:text-white'>
                             <CreditCardIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Debit</p>
-                    </a>
+                    </button>
                 </div>
             </div>
 
             <div className='px-8 px-10 flex gap-2 pt-5'>
                 <button type="button" className="text-acc-color bg-acc-btn hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Put on hold</button>
-                <button type="button" className="text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Proceed</button>
+                <button type="button" className="text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => proceedCart()}>Proceed</button>
             </div>
         </div>
     );
