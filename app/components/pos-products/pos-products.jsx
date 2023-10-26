@@ -274,7 +274,7 @@ export default function PosProduct() {
             ) : (
                 <div className="w-full px-2 grid grid-cols-2 md:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => (
-                        <button key={index} className="cursor-pointer" onClick={() => handleCartProduct(product)}>
+                        <button key={index} className="cursor-pointer transform active:scale-75 transition-transform" onClick={() => handleCartProduct(product)}>
                             <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                                 <div>
                                     <h4 className="text-[16px] sm:text-[18px] text-left text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>

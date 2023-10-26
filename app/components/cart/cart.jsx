@@ -37,7 +37,7 @@ export default function Cart(cartOpen) {
             const productToAdd = e.detail.product;
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
             setCartProducts(objectsWithAggregatedQuantity.reverse());
-            // Move localStorage update here
+            
             localStorage.setItem('cartProducts', JSON.stringify([...objectsWithAggregatedQuantity]));
         };
 

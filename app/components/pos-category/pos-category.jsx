@@ -226,9 +226,9 @@ export default function PosCategory() {
 
     return (
 
-        <div className="flex pb-8 border-b-[0.5px] border-acc-color flex-wrap -mx-2">
+        <div className="flex pb-8 border-b-[0.5px] border-acc-color flex-wrap -mx-2 mt-28 md:mt-0">
             {uniqueCategoriesWithCount.map((category, index) => (
-            <button key={index} onClick={() => handleCategoryClick(category.category)} className="cursor-pointer w-1/2 md:w-1/4 xl:w-1/6 px-2 mb-4">
+            <button key={index} onClick={() => handleCategoryClick(category.category)} className="cursor-pointer w-1/2 md:w-1/4 xl:w-1/6 px-2 mb-4 transform active:scale-75 transition-transform">
                 <div style={{ background: colors[index % colors.length] }} className={`text-white font-light flex flex-col justify-between p-6 xl:h-[120px] h-[100px] rounded-lg shadow`}>
                 <h4 className="lg:text-[14px] text-left xl:text-[18px] font-bold">{category.category}</h4>
                 <p className="text-[12px] text-left">{category.itemCount} items</p>
