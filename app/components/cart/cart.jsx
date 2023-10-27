@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BanknotesIcon, CreditCardIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { BanknotesIcon, CreditCardIcon, DevicePhoneMobileIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Cart(cartOpen) {
     const taxRate = 0.16;
@@ -113,6 +113,9 @@ export default function Cart(cartOpen) {
                     detail: {   
                         method: paymentMethod,
                         display: true,
+                        subtotal: calculateSubTotalPrice().toLocaleString(),
+                        tax: calculateTaxAmount().toLocaleString(),
+                        total: (calculateSubTotalPrice() + calculateTaxAmount()).toLocaleString(),
                     }
                 })
 
@@ -125,7 +128,7 @@ export default function Cart(cartOpen) {
     }
 
     return (
-        <div className={`lg:block w-full md:w-[30%] fixed right-0 h-screen bg-white`}>
+        <div className={`lg:block w-full md:w-[30%] overflow-auto fixed right-0 h-screen bg-white`}>
             <div className='flex justify-between py-5 px-8 md:px-10 items-center'>
                 <h4 className='font-bold text-2xl'>Customer Orders</h4>
                 <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
@@ -196,7 +199,7 @@ export default function Cart(cartOpen) {
                     <p className='font-bold'>Ksh. {calculateSubTotalPrice().toLocaleString()}</p>
                 </div>
                 <div className='flex justify-between pb-3 items-center border-dashed border-b-2 border-acc-color'>
-                    <p className='text-acc-color'>Tax 16%</p>
+                    <p className='text-acc-color'>Tax {taxRate * 100}%</p>
                     <p className='font-bold'>Ksh. {calculateTaxAmount().toLocaleString()}</p>
                 </div>
                 <div className='flex justify-between items-center pt-3'>
@@ -220,6 +223,13 @@ export default function Cart(cartOpen) {
                             <CreditCardIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Debit</p>
+                    </button>
+
+                    <button onClick={() => setMethod('mpesa')} className='cursor-pointer text-center'>
+                        <div className='p-4 bg-acc-btn rounded-lg hover:bg-primary hover:text-white'>
+                            <DevicePhoneMobileIcon className="h-5 w-5 text-acc-color"/>
+                        </div>
+                        <p className='text-sm text-acc-color mt-2'>Mpesa</p>
                     </button>
                 </div>
             </div>

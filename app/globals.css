@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body{
-  background-color: #F1F1F1;
+  /* background-color: #F1F1F1; */
+  background-color: #fff;
 }
 
 .sidebar {
@@ -99,7 +100,7 @@ body{
   .glass-blur{
     /* From https://css.glass */
     background: rgba(0, 0, 0, .45);
-    border-radius: 16px;
+    border-radius: 0;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);

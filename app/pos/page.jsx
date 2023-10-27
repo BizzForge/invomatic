@@ -15,7 +15,7 @@ export default function Pos() {
 
     return (
         <Console>
-            <div className={`relative md:mt-0 block md:flex`}>
+            <div className={`relative md:mt-0 block md:flex bg-main-bg`}>
                 <div className={`w-full md:w-[68.8%] ${!cartOpen ? "block" : "hidden"} overflow-auto block p-2 md:p-7 md:mr-7`}>
                     <PosCategory />
                     <PosProduct />
