@@ -2,6 +2,7 @@
 import Aside from '@/app/components/aside/aside'
 import React, {useState} from 'react'
 import Modal from '../../components/modal/modal'
+import InputWithoutIcon from '@/app/components/inputs/input-without-icon/input-without-icon';
 
 export default function Console({children}) {
   const [display, setDisplay] = useState(false);
@@ -9,6 +10,7 @@ export default function Console({children}) {
   const [subtotal, setSubtotal] = useState('');
   const [tax, setTax ] = useState('');
   const [total, setTotal] = useState('');
+  const [rem, setRem] = useState(0);
 
 
   useState(()=>{
@@ -33,12 +35,38 @@ export default function Console({children}) {
     setDisplay(false)
   }
 
+  const orderComplete = () => {
+    const cashInput = document.querySelector('#cash');
+
+    const convertTotal = total.replace(/,/g, '');
+    const convertTotalToNumber = parseInt(convertTotal);
+
+    if(cashInput.valueAsNumber === convertTotalToNumber){
+      console.log(true);
+    } else {
+      if(cashInput.valueAsNumber > convertTotalToNumber){
+        let result = cashInput.valueAsNumber - convertTotalToNumber
+        setRem(result);
+        console.log(rem, result)
+      }else{
+        console.log('not enough cash')
+        // setChange(convertTotalToNumber - cashInput.valueAsNumber);
+      }
+
+      console.log(rem)
+    }
+  }
+
   return (
     <div className='bg-main-bg'>
       <Modal display={display} onClose={handleCloseModal}>
         {paymentMethod === 'cash' ? (
           <div>
             <h2 className='font-bold text-lg capitalize'>{paymentMethod} payment</h2>
+
+            <div className="py-5">
+              <InputWithoutIcon id="cash" type="number" placeholder="Enter cash payed"/>
+            </div>
 
             <div className='w-full pt-8 px-0 md:px-0 pb-10'>
               <div className='flex justify-between items-center pb-3'>
@@ -55,7 +83,7 @@ export default function Console({children}) {
               </div>
             </div>
 
-            <button type="button" className="w-full text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Complete Order</button>
+            <button type="button" onClick={orderComplete} className="w-full text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Complete Order</button>
           </div>
         ) : paymentMethod === 'debit' ? (
             <div>

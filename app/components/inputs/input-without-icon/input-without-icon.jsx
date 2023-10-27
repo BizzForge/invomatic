@@ -1,10 +1,11 @@
-export default  function InputWithoutIcon({ leftIcon, rightIcon, type, placeholder, onClick, isFirst, isLast, change }) {
+export default  function InputWithoutIcon({ leftIcon, rightIcon, type, placeholder, id, onClick, isFirst, isLast, change }) {
     const containerClasses = `relative ${isFirst ? 'mr-2' : ''} ${isLast ? 'ml-2' : ''}`;
 
     return (
         <div className={containerClasses}>
             <input
-                className="pl-16 pr-16 py-2.5 placeholder-pl-color bg-input-color rounded-md w-full"
+                id={id}
+                className="pl-5 pr-16 py-2.5 placeholder-pl-color bg-input-color rounded-md w-full"
                 type={type}
                 placeholder={placeholder}
                 onChange={change}

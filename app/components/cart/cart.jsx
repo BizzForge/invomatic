@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { BanknotesIcon, CreditCardIcon, DevicePhoneMobileIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 export default function Cart(cartOpen) {
     const taxRate = 0.16;
     const [cartProducts, setCartProducts] = useState([]);
     const [editableIndex, setEditableIndex] = useState(-1);
     const [paymentMethod, setPaymentMethod] = useState('cash');
+    const [productInCart, setProductInCart] = useState(true);
 
     const addQuantityForDuplicateIDs = (array) => {
         const idMap = {};
@@ -28,6 +30,7 @@ export default function Cart(cartOpen) {
 
     useEffect(() => {
         const savedCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+        setProductInCart(false)
         if (savedCartProducts) {
             setCartProducts(savedCartProducts);
         }
@@ -36,6 +39,8 @@ export default function Cart(cartOpen) {
     useEffect(() => {
         const addCartProducts = async (e) => {
             const productToAdd = e.detail.product;
+
+            setProductInCart(false)
 
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
             setCartProducts(objectsWithAggregatedQuantity);
@@ -92,6 +97,7 @@ export default function Cart(cartOpen) {
 
     const clearCartProducts = () => {
         setCartProducts([]);
+        setProductInCart(true)
         localStorage.removeItem('cartProducts');
     };
 
@@ -145,7 +151,7 @@ export default function Cart(cartOpen) {
                                             {product.productTitle}
                                         </p>
                                         <p className="text-sm text-acc-color truncate">
-                                        {product.subtitle} - Ksh {product.price}
+                                        {product.subtitle} - Ksh {product.price.toLocaleString()}
                                         </p>
                                     </div>
                                     {editableIndex === index ? (
@@ -172,11 +178,11 @@ export default function Cart(cartOpen) {
                                             onClick={() => handleStartEdit(index)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            {product.quantity}
+                                            {product.quantity.toLocaleString()}
                                         </div>
                                     )}
                                     <div className="inline-flex items-center text-base font-semibold text-acc-color">
-                                        Ksh. {product.updatedPrice ? product.updatedPrice : product.price} 
+                                        Ksh. {product.updatedPrice ? product.updatedPrice.toLocaleString() : product.price.toLocaleString()} 
                                     </div>
                                     <div className='flex gap-2'>
                                         <button
@@ -236,7 +242,7 @@ export default function Cart(cartOpen) {
 
             <div className='px-8 px-10 flex gap-2 pt-5'>
                 <button type="button" className="text-acc-color bg-acc-btn hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Put on hold</button>
-                <button type="button" className="text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => proceedCart()}>Proceed</button>
+                <button type="button" className={`text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ${productInCart ? 'cursor-not-allowed' : 'pointer'}`} onClick={() => proceedCart()} disabled={productInCart}>Proceed</button>
             </div>
         </div>
     );
