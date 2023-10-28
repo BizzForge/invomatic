@@ -126,6 +126,7 @@ export default function Cart(cartOpen) {
                         subtotal: calculateSubTotalPrice().toLocaleString(),
                         tax: calculateTaxAmount().toLocaleString(),
                         total: (calculateSubTotalPrice() + calculateTaxAmount()).toLocaleString(),
+                        products: cartProducts
                     }
                 })
 
