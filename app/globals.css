@@ -105,3 +105,19 @@ body{
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);
   }
+
+
+  .btn:hover > p{
+    font-weight: bold;
+  }
+  .active {
+    background-color: #007bff; 
+    color: #fff;
+  }
+  .active > svg path,  .active > svg rect{
+    color: #fff;
+  }
+  .active + p{
+    color: #0079FF;
+    font-weight: bold;
+  }

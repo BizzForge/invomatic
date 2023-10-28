@@ -28,11 +28,15 @@ export default function Cart(cartOpen) {
         return Object.values(idMap);
     }
 
+    
+
     useEffect(() => {
         const savedCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-        setProductInCart(false)
+        setProductInCart(false);
         if (savedCartProducts) {
             setCartProducts(savedCartProducts);
+        } else {
+            setCartProducts([]);
         }
     }, []);
 
@@ -40,7 +44,7 @@ export default function Cart(cartOpen) {
         const addCartProducts = async (e) => {
             const productToAdd = e.detail.product;
 
-            setProductInCart(false)
+            setProductInCart(false);
 
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
             setCartProducts(objectsWithAggregatedQuantity);
@@ -72,10 +76,10 @@ export default function Cart(cartOpen) {
     };
 
     const removeCartProduct = (productToRemove) => {
-        const updatedCart = cartProducts.filter((product) => product !== productToRemove);
-
+        const updatedCart = cartProducts.filter((product) => product.id !== productToRemove.id);
+        setProductInCart(false);
         setCartProducts(updatedCart);
-
+    
         const updatedCartJSON = JSON.stringify(updatedCart);
         localStorage.setItem('cartProducts', updatedCartJSON);
     }
@@ -217,26 +221,26 @@ export default function Cart(cartOpen) {
             <div className='px-8 md:px-10'>
                 <h4 className='font-bold text-2xl'>Payment Method</h4>
                 <div className='flex gap-3 mt-3'>
-                    <button onClick={() => setMethod('cash')} className='cursor-pointer text-center'>
-                        <div className='p-4 bg-acc-btn rounded-lg  hover:bg-primary hover:text-white'>
+                    <button onClick={() => setMethod('cash')} className="cursor-pointer text-center btn">
+                        <div className={`p-4 bg-acc-btn rounded-lg  hover:pl-color ${paymentMethod === 'cash' ? 'active' : ''}`}>
                             <BanknotesIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Cash</p>
                     </button>
 
-                    <button onClick={() => setMethod('debit')} className='cursor-pointer text-center'>
-                        <div className='p-4 bg-acc-btn rounded-lg hover:bg-primary hover:text-white'>
+                    {/* <button onClick={() => setMethod('debit')} className={`cursor-pointer text-center btn`}>
+                        <div className={`p-4 bg-acc-btn rounded-lg hover:pl-color ${paymentMethod === 'debit' ? 'active' : ''}`}>
                             <CreditCardIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Debit</p>
                     </button>
 
-                    <button onClick={() => setMethod('mpesa')} className='cursor-pointer text-center'>
-                        <div className='p-4 bg-acc-btn rounded-lg hover:bg-primary hover:text-white'>
+                    <button onClick={() => setMethod('mpesa')} className={`cursor-pointer text-center btn`}>
+                        <div className={`p-4 bg-acc-btn rounded-lg hover:pl-color ${paymentMethod === 'mpesa' ? 'active' : ''}`}>
                             <DevicePhoneMobileIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Mpesa</p>
-                    </button>
+                    </button> */}
                 </div>
             </div>
 
