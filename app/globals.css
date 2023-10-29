@@ -121,3 +121,23 @@ body{
     color: #0079FF;
     font-weight: bold;
   }
+
+  .receipt {
+    font-family: Arial, sans-serif;
+  }
+
+  @media print{
+    .modal-title, .modal-btn{
+      display: none;
+    }
+
+    .receipt-lists li, .total, .payments{
+      display: flex!important;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #receipt, #receipt *{
+      display: block;
+    }
+  }

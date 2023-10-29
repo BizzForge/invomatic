@@ -18,6 +18,7 @@ export default function Console({children}) {
   const [paymentCheck, setPaymentCheck] = useState(false);
   const [receiptView, setReceiptView] = useState(false);
   const [products, setProducts] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
 
   useState(()=>{
@@ -46,10 +47,12 @@ export default function Console({children}) {
 
   const orderComplete = () => {
     const cashInput = document.querySelector('#cash');
-    const cashValue = cashInput.value.trim();
+    const cashValue = cashInput.value.trim().toLocaleString();
 
     const convertTotal = total.replace(/,/g, '');
     const convertTotalToNumber = parseInt(convertTotal);
+
+    setInputValue(cashValue);
 
     if(cashValue === ''){
       toast.error('Cash field cannot be empty');
@@ -94,42 +97,62 @@ export default function Console({children}) {
           <div>
             {receiptView ? (
               <Fragment>
-                <h2 className='font-bold text-lg capitalize'>Receipt</h2>
+                <h2 className='font-bold text-lg capitalize modal-title'>Receipt</h2>
 
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
-                    <tr>
-                      <th className="text-left">Product Title</th>
-                      <th className="text-left">Original</th>
-                      <th className="text-left">Qty</th>
-                      <th className="text-left">final</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {products.map((product, index) => (
-                      <tr key={index}>
-                        <td className="text-sm text-gray-500 font-bold truncate">{product.productTitle}</td>
-                        <td className="text-sm text-acc-color truncate">
-                          Ksh {product.price.toLocaleString()}
-                        </td>
-                        <td>{product.quantity.toLocaleString()}</td>
-                        <td className="text-acc-color">
-                          Ksh. {product.updatedPrice ? product.updatedPrice.toLocaleString() : product.price.toLocaleString()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <div className='receipt text-xs w-full mx-auto p-3' id="receipt">
+                  <div class="text-center mb-5">
+                      <div class="text-xl font-bold uppercase">Receipt</div>
+                      <div class="receipt-info">
+                          Date: October 29, 2023<br />
+                          Transaction ID: #123456
+                      </div>
+                  </div>
 
-                <p className='py-2'><span className='font-bold'>Change</span> {rem}</p>
+                  <Fragment>
+                    <ul class="receipt-lists max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
+                      {products.map((product, index) => (
+                      <li key={index} className='py-1 flex justify-between items-center'>
+                          <div>
+                            <p>{product.productTitle}</p>
+                            {product.quantity} x Ksh {product.price}
+                          </div>
+                          <div>
+                            <p>Ksh {product.updatedPrice ? product.updatedPrice : product.price}</p>
+                          </div>
+                      </li>
+                      ))}
+                    </ul>
+                  </Fragment>
 
-                <div className='flex justify-between items-center py-3 mt-4 border-dashed border-b-2 border-t-2 border-acc-color'>
-                  <p className='text-acc-color text-2xl'>Total</p>
-                  <p className='font-bold text-2xl'>Ksh. {total}</p>
+                  <div className='total flex justify-between items-center py-3 mt-4 border-dashed border-b-2 border-t-2 border-acc-color'>
+                    <p className='text-acc-color text-2xl'>Total</p>
+                    <p className='font-bold text-2xl'>Ksh. {total}</p>
+                  </div>
+
+
+                  <div className='py-3'>
+                    <div className='payments flex py-1 justify-between items-center'>
+                      <p className='font-bold capitalize'>{paymentMethod}:</p>
+                      <p>ksh {inputValue}</p>
+                    </div>
+                    <div className='payments flex py-1 justify-between items-center'>
+                      <p className='font-bold'>Paid amount:</p>
+                      <p>ksh {total}</p>
+                    </div>
+                    {rem != 0 ? (
+                    <div className='payments flex py-1 justify-between items-center'>
+                      <p className='font-bold'>Change:</p>
+                      <p>ksh {rem.toLocaleString()}</p>
+                    </div>
+                    ) : ''}
+                  </div>
+
+                  <div className='w-full mt-4'>
+                    <center><p>*********************************************************</p></center>
+                    <center><p className='py-1'><i>Thank you for shopping with us</i></p></center>
+                    <center><p>*********************************************************</p></center>
+                  </div>
                 </div>
-
-                <p className='py-2 text-acc-btn'>Payed Via {paymentMethod}</p>
-
                 {/* <div className='mt-4'>
                   <div className="flex items-center mb-4">
                       <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
@@ -141,7 +164,7 @@ export default function Console({children}) {
                   </div>
                 </div> */}
 
-                <button type="button" onClick={onPrint} className="w-full mt-4 text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Proceed</button>
+                <button type="button" onClick={onPrint} className="modal-btn w-full mt-4 text-white bg-primary hover:bg-blue-800 w-1/2 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover-bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Proceed</button>
               </Fragment>
 
 
