@@ -108,6 +108,13 @@ export default function Console({children}) {
                       </div>
                   </div>
 
+                  <div className="mb-4 border-dashed border-b-1 border-acc-color">
+                    <div class="receipt-info">
+                        Date: October 29, 2023<br />
+                        Transaction ID: #123456
+                    </div>
+                  </div>
+
                   <Fragment>
                     <ul class="receipt-lists max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
                       {products.map((product, index) => (

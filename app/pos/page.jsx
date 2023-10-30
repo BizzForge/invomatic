@@ -15,7 +15,7 @@ export default function Pos() {
 
     return (
         <Console>
-            <div className={`relative md:mt-0 block md:flex bg-main-bg`}>
+            <div className={`pos relative md:mt-0 block md:flex bg-main-bg`}>
                 <div className={`w-full md:w-[68.8%] ${!cartOpen ? "block" : "hidden"} overflow-auto block p-2 md:p-7 md:mr-7`}>
                     <PosCategory />
                     <PosProduct />
@@ -25,7 +25,7 @@ export default function Pos() {
                     <Cart cartOpen={cartOpen}/>
                 </div>
             </div>
-            <a onClick={() => openCart()} className='lg:hidden cursor-pointer fixed shadow-lg w-[30px] h-[30px] rounded-full bg-primary p-8 bottom-[20px] right-[20px]'>
+            <a onClick={() => openCart()} className='action-btn lg:hidden cursor-pointer fixed shadow-lg w-[30px] h-[30px] rounded-full bg-primary p-8 bottom-[20px] right-[20px]'>
                 {cartOpen ? (
                     <XMarkIcon className="h-5 w-5 text-white absolute top-[34%] right-[34%]"/>
                     ) : (

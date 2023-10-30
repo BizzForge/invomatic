@@ -127,7 +127,10 @@ body{
   }
 
   @media print{
-    .modal-title, .modal-btn{
+    .receipt, .rcp{
+      width: 100%!important;
+    }
+    .modal-title, .modal-btn, .remove, .overlay, .pos *, .aside, .action-btn{
       display: none;
     }
 

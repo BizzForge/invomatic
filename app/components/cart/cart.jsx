@@ -229,18 +229,18 @@ export default function Cart(cartOpen) {
                         <p className='text-sm text-acc-color mt-2'>Cash</p>
                     </button>
 
-                    {/* <button onClick={() => setMethod('debit')} className={`cursor-pointer text-center btn`}>
-                        <div className={`p-4 bg-acc-btn rounded-lg hover:pl-color ${paymentMethod === 'debit' ? 'active' : ''}`}>
-                            <CreditCardIcon className="h-5 w-5 text-acc-color"/>
-                        </div>
-                        <p className='text-sm text-acc-color mt-2'>Debit</p>
-                    </button>
-
                     <button onClick={() => setMethod('mpesa')} className={`cursor-pointer text-center btn`}>
                         <div className={`p-4 bg-acc-btn rounded-lg hover:pl-color ${paymentMethod === 'mpesa' ? 'active' : ''}`}>
                             <DevicePhoneMobileIcon className="h-5 w-5 text-acc-color"/>
                         </div>
                         <p className='text-sm text-acc-color mt-2'>Mpesa</p>
+                    </button>
+
+                    {/* <button onClick={() => setMethod('debit')} className={`cursor-pointer text-center btn`}>
+                        <div className={`p-4 bg-acc-btn rounded-lg hover:pl-color ${paymentMethod === 'debit' ? 'active' : ''}`}>
+                            <CreditCardIcon className="h-5 w-5 text-acc-color"/>
+                        </div>
+                        <p className='text-sm text-acc-color mt-2'>Debit</p>
                     </button> */}
                 </div>
             </div>
