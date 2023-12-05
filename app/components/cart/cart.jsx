@@ -1,11 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect } from 'react';
 import { BanknotesIcon, CreditCardIcon, DevicePhoneMobileIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
+import { add, remove, update } from '@/redux/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+
 export default function Cart(cartOpen) {
+    const inputRef = useRef(null);
     const taxRate = 0.16;
+    const dispatch = useAppDispatch();
+    const allCartProducts = useAppSelector(state=>state);
+    console.log("Cart=>",allCartProducts.cart);
+
     const [cartProducts, setCartProducts] = useState([]);
     const [editableIndex, setEditableIndex] = useState(-1);
     const [paymentMethod, setPaymentMethod] = useState('cash');
@@ -60,6 +68,11 @@ export default function Cart(cartOpen) {
     }, [cartProducts]);
 
     const calculateSubTotalPrice = () => {
+        const total = allCartProducts.cart
+                    .map(item=>Number(item.payload.item.price)*Number(item.payload.quantity))
+                    .reduce((prev,curr)=>prev+curr,0);
+        
+        return total;
         if (cartProducts.length === 0) {
             return 0;
         }
@@ -74,6 +87,8 @@ export default function Cart(cartOpen) {
         const taxAmount = totalPrice * taxRate;
         return taxAmount;
     };
+
+    
 
     const removeCartProduct = (productToRemove) => {
         const updatedCart = cartProducts.filter((product) => product.id !== productToRemove.id);
@@ -93,6 +108,31 @@ export default function Cart(cartOpen) {
     };
 
     const handleQuantityEdit = (e, index) => {
+        let availableCartProducts = [...allCartProducts.cart];
+        if(e.target.value>0){
+            for(let i=0;i<availableCartProducts.length;i++){
+                if(availableCartProducts[index].payload.item.id == availableCartProducts[i].payload.item.id){
+                    let val  = {...availableCartProducts[index].payload};
+                    val.quantity = parseInt(e.target.value);
+                    availableCartProducts[index] = {payload:val};
+                    break;
+                }
+            }
+            
+            dispatch(update(availableCartProducts));
+        }else{
+            removeProduct(allCartProducts.cart[index].payload.item);
+        }
+
+        try {
+            localStorage.removeItem("cartProducts");
+            localStorage.setItem("cartProducts",JSON.stringify(availableCartProducts));
+            handleFinishEdit();
+        } catch (error) {
+            throw new Error("Unable to update local storage");
+        }
+        
+        return;
         const updatedCart = [...cartProducts];
         updatedCart[index].quantity = parseInt(e.target.value, 10); // Ensure it's a number
         setCartProducts(updatedCart);
@@ -138,32 +178,67 @@ export default function Cart(cartOpen) {
         setPaymentMethod(method)
     }
 
+
+    const removeProduct = (product)=>{
+        let availableProducts = [...allCartProducts.cart];
+        let prods = availableProducts.filter(prod=>prod.payload.item.id !== product.id);
+        dispatch(update(prods));
+        try {
+            localStorage.removeItem("cartProducts");
+            localStorage.setItem("cartProducts",JSON.stringify(prods));
+        } catch (error) {
+            throw new Error("Unable to delete local storage");
+        }
+    }
+
+    const removeAll = ()=>{
+        dispatch(remove());
+        try {
+            localStorage.removeItem("cartProducts");
+        } catch (error) {
+            throw new Error("Unable to delete local storage");
+        }
+        
+    }
+
+    useEffect(()=>{
+        const savedCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+        if (savedCartProducts) {
+            dispatch(update(savedCartProducts));
+        }
+    },[]);
+
     return (
         <div className={`lg:block w-full md:w-[30%] overflow-auto fixed right-0 h-screen bg-white`}>
             <div className='flex justify-between py-5 px-8 md:px-10 items-center'>
                 <h4 className='font-bold text-2xl'>Customer Orders</h4>
-                <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => clearCartProducts()}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
+                <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => {
+                    //clearCartProducts();
+                    removeAll();
+                    }}><TrashIcon className="h-5 w-5 text-acc-color"/></button>
             </div>
  
             <div className='h-1/5 sm:h-2/5 no-scrollbar overflow-y-auto scroll-smooth px-8 md:px-10'>
                 <ul className="max-w-md divide-y divide-acc-btn">
-                    {cartProducts.length === 0 ? (<p className='w-full text-center text-acc-btn'>cart is empty</p>) : (
-                        Array.isArray(cartProducts) && cartProducts.map((product, index) => (
-                            <li className="py-4" key={index}>
+                    {allCartProducts.cart.length === 0 ? (<p className='w-full text-center text-acc-btn'>cart is empty</p>) : (
+                        Array.isArray(allCartProducts.cart) && allCartProducts.cart.map((product, index) => 
+                        {
+                            return(
+                                <li className="py-4" key={index}>
                                 <div className="flex items-center space-x-4">
                                     <div className="flex-1 min-w-0">
                                         <p className="text-sm text-gray-500 font-bold truncate">
-                                            {product.productTitle}
+                                            {product.payload.item?.productTitle}
                                         </p>
                                         <p className="text-sm text-acc-color truncate">
-                                        {product.subtitle} - Ksh {product.price.toLocaleString()}
+                                        {product.payload.item?.subtitle} - Ksh {product.payload.item?.price.toLocaleString()}
                                         </p>
                                     </div>
                                     {editableIndex === index ? (
                                         <input
                                             type="number"
                                             className='bg-[transparent]'
-                                            value={product.quantity}
+                                            value={product.payload.quantity}
                                             onChange={(e) => handleQuantityEdit(e, index)}
                                             onBlur={handleFinishEdit}
                                             onKeyPress={(e) => {
@@ -183,23 +258,27 @@ export default function Cart(cartOpen) {
                                             onClick={() => handleStartEdit(index)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            {product.quantity.toLocaleString()}
+                                            {product.payload.quantity.toLocaleString()}
                                         </div>
                                     )}
                                     <div className="inline-flex items-center text-base font-semibold text-acc-color">
-                                        Ksh. {product.updatedPrice ? product.updatedPrice.toLocaleString() : product.price.toLocaleString()} 
+                                        Ksh. {product.payload.item?.updatedPrice ? product.payload.item?.updatedPrice.toLocaleString() : product.payload.item?.price.toLocaleString()} 
                                     </div>
                                     <div className='flex gap-2'>
                                         <button
                                             className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute'
-                                            onClick={() => removeCartProduct(product)}
+                                            onClick={() => {
+                                                //removeCartProduct(product.payload.item);
+                                                removeProduct(product.payload.item);
+                                            }}
                                         >
                                             <XMarkIcon className="h-5 w-5 text-acc-color hover:text-danger" />
                                         </button>
                                     </div>
                                 </div>
                             </li>
-                        ))
+                            )
+                        })
                     )}
                 </ul>
             </div>
