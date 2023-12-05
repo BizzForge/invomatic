@@ -1,5 +1,7 @@
+import StoreProvider from './StoreProvider';
 import './globals.css'
-import { Outfit } from 'next/font/google'
+import { Outfit } from 'next/font/google';
+
 
 const outfit = Outfit({ subsets: ['latin'] })
 
@@ -11,9 +13,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <StoreProvider>
       <body className={`${outfit.className}`}>
         {children}
       </body>
+      </StoreProvider>
     </html>
   )
 }

@@ -1,7 +1,12 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
+import { add, update } from "../../../redux/cartSlice.js";
+import { useAppDispatch, useAppSelector, useAppStore } from "../../../redux/hooks.js";
+
 
 export default function PosProduct() {
+    const dispatch = useAppDispatch();
+
     const [products, setProducts] = useState([
         {
             "id": 1,
@@ -221,6 +226,9 @@ export default function PosProduct() {
         }
     ]);
 
+
+    const [isAdding,setIsAdding] = useState(false);
+
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [title, setTitle] = useState("");
@@ -242,7 +250,42 @@ export default function PosProduct() {
         setFilteredProducts(filtered);
     }, [title, products]);
 
+
+
+    const cartProducts = useAppSelector(state=>state);
+    const isIncart = (product)=>{
+        let availableCartProducts = [...cartProducts.cart];
+        for(let i=0;i<availableCartProducts.length;i++){
+            if(availableCartProducts[i].payload.item.id == product.id){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     const handleCartProduct = (product) => {
+        setIsAdding(true);
+        let availableCartProducts = [...cartProducts.cart];
+        if(isIncart(product)){
+            availableCartProducts.forEach((item,index)=>{
+                if(product.id == item.payload.item.id){
+                    let val  = {...availableCartProducts[index].payload};
+                    val.quantity += 1;
+                    availableCartProducts[index] = {payload:val};
+                }
+            });
+            dispatch(update(availableCartProducts));
+        }else{
+            dispatch(add({item:product,quantity:1}));
+
+        }
+
+        /************** END OF ADD AND UPDATE *************/
+        
+
+
+        return;
         const updateProduct = [...selectedProducts, product];
         setSelectedProducts(updateProduct);
 
@@ -267,14 +310,30 @@ export default function PosProduct() {
         }
     }
 
+    
+
+    useEffect(()=>{
+        if(isAdding){
+            try {
+                localStorage.removeItem("cartProducts");
+                localStorage.setItem("cartProducts",JSON.stringify(cartProducts.cart));
+            } catch (error) {
+                throw new Error("Unable to add local storage");
+            }
+        }
+    },[cartProducts])
+
     return (
+        
         <div className="flex pt-8 flex-wrap -mx-2">
           {filteredProducts.length === 0 ? (
                 <p className="text-acc-color text-center w-full">Choose a category.</p>
             ) : (
                 <div className="w-full px-2 grid grid-cols-2 md:grid-cols-4 gap-4">
                     {filteredProducts.map((product, index) => (
-                        <button key={index} className="cursor-pointer transform active:scale-75 transition-transform" onClick={() => handleCartProduct(product)}>
+                        <button key={index} 
+                            className="cursor-pointer transform active:scale-75 transition-transform" 
+                            onClick={() => handleCartProduct(product)}>
                             <div className={`font-light bg-white flex flex-col justify-between p-6 h-[140px] rounded-lg shadow`}>
                                 <div>
                                     <h4 className="text-[16px] sm:text-[18px] text-left text-acc-color-2 font-bold pb-1">{product.productTitle}</h4>

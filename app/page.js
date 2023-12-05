@@ -1,7 +1,6 @@
 'use client'
-import { Fragment, useEffect } from 'react'
-import Login from './login/page'
-
+import { Fragment, useEffect } from 'react';
+import Login from './login/page';
 
 function loader() {
   if (document.readyState !== "complete") {
