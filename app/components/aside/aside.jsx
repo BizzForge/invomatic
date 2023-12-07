@@ -31,11 +31,11 @@ export default function Aside() {
         //   Icon: ChartPieIcon,
         //   title: 'Analytics',
         // },
-        {
-          link: '/customers',
-          Icon: UserIcon,
-          title: 'Customer',
-        },
+        // {
+        //   link: '/customers',
+        //   Icon: UserIcon,
+        //   title: 'Customer',
+        // },
         // {
         //   link: '/promos',
         //   Icon: MegaphoneIcon,

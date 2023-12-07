@@ -12,7 +12,6 @@ export default function Cart(cartOpen) {
     const taxRate = 0.16;
     const dispatch = useAppDispatch();
     const allCartProducts = useAppSelector(state=>state);
-    console.log("Cart=>",allCartProducts.cart);
 
     const [cartProducts, setCartProducts] = useState([]);
     const [editableIndex, setEditableIndex] = useState(-1);
@@ -51,13 +50,26 @@ export default function Cart(cartOpen) {
     useEffect(() => {
         const addCartProducts = async (e) => {
             const productToAdd = e.detail.product;
-
+        
             setProductInCart(false);
-
+        
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
-            setCartProducts(objectsWithAggregatedQuantity);
             
-            localStorage.setItem('cartProducts', JSON.stringify([...objectsWithAggregatedQuantity]));
+            // Calculate and add updatedPrice to each product before setting the cartProducts state
+            const cartWithUpdatedPrice = objectsWithAggregatedQuantity.map(product => ({
+                ...product,
+                payload: {
+                    ...product.payload,
+                    item: {
+                        ...product.payload.item,
+                        updatedPrice: product.payload.item.price * product.quantity
+                    }
+                }
+            }));
+        
+            setCartProducts(cartWithUpdatedPrice);
+            
+            localStorage.setItem('cartProducts', JSON.stringify([...cartWithUpdatedPrice]));
         };
 
         window.addEventListener('addToCart', addCartProducts);
@@ -73,13 +85,13 @@ export default function Cart(cartOpen) {
                     .reduce((prev,curr)=>prev+curr,0);
         
         return total;
-        if (cartProducts.length === 0) {
-            return 0;
-        }
+        // if (cartProducts.length === 0) {
+        //     return 0;
+        // }
 
-        const totalPrice = cartProducts.reduce((total, product) => total + (product.updatedPrice ? product.updatedPrice : product.price), 0);
+        // const totalPrice = cartProducts.reduce((total, product) => total + (product.updatedPrice ? product.updatedPrice : product.price), 0);
 
-        return totalPrice;
+        // return totalPrice;
     };
 
     const calculateTaxAmount = () => {
@@ -90,14 +102,14 @@ export default function Cart(cartOpen) {
 
     
 
-    const removeCartProduct = (productToRemove) => {
-        const updatedCart = cartProducts.filter((product) => product.id !== productToRemove.id);
-        setProductInCart(false);
-        setCartProducts(updatedCart);
+    // const removeCartProduct = (productToRemove) => {
+    //     const updatedCart = cartProducts.filter((product) => product.id !== productToRemove.id);
+    //     setProductInCart(false);
+    //     setCartProducts(updatedCart);
     
-        const updatedCartJSON = JSON.stringify(updatedCart);
-        localStorage.setItem('cartProducts', updatedCartJSON);
-    }
+    //     const updatedCartJSON = JSON.stringify(updatedCart);
+    //     localStorage.setItem('cartProducts', updatedCartJSON);
+    // }
 
     const handleStartEdit = (index) => {
         setEditableIndex(index);
@@ -139,11 +151,11 @@ export default function Cart(cartOpen) {
         handleFinishEdit();
     };
 
-    const clearCartProducts = () => {
-        setCartProducts([]);
-        setProductInCart(true)
-        localStorage.removeItem('cartProducts');
-    };
+    // const clearCartProducts = () => {
+    //     setCartProducts([]);
+    //     setProductInCart(true)
+    //     localStorage.removeItem('cartProducts');
+    // };
 
     const proceedCart = async () => {
         switch (paymentMethod) {
