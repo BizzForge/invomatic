@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Session({children}) {
   return (
-    <div className="w-full flex items-stretch md:p-6 p-0">
-      <div className="block bg-primary md:bg-white w-full h-[calc(100vh-3rem)] md:flex md:flex-row-reverse">
+    <div className="w-full flex items-stretch">
+      <div className="block bg-primary md:bg-white w-full h-[calc(100vh-3rem)] md:flex md:flex-row-reverse  md:p-6 p-0">
         <div className="w-full md:h-[calc(100vh-3rem)] md:block md:w-2/5 flex-1 bg-primary md:rounded-2xl p-8 lg:p-20">
           <Link href="/" className="flex mb-10 md:hidden block">
             <Image src="/images/logoipsum-296.svg" alt="brand" width={26} height={26} />

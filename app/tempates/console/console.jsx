@@ -120,7 +120,6 @@ export default function Console({children}) {
                       {products.map((product, index) => (
                       <li key={index} className='py-1 flex justify-between items-center'>
                           <div>
-                            {console.log(product)}
                             <p>{product.payload.item?.productTitle}</p>
                             {product.payload.quantity} x Ksh {product.payload.item?.price}
                           </div>

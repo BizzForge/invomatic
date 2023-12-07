@@ -55,7 +55,6 @@ export default function Cart(cartOpen) {
         
             const objectsWithAggregatedQuantity = addQuantityForDuplicateIDs(productToAdd);
             
-            // Calculate and add updatedPrice to each product before setting the cartProducts state
             const cartWithUpdatedPrice = objectsWithAggregatedQuantity.map(product => ({
                 ...product,
                 payload: {
@@ -221,7 +220,7 @@ export default function Cart(cartOpen) {
     },[]);
 
     return (
-        <div className={`lg:block w-full md:w-[30%] overflow-auto fixed right-0 h-screen bg-white`}>
+        <div className={`lg:block w-full md:w-[30%] overflow-auto fixed no-scrollbar right-0 h-screen bg-white`}>
             <div className='flex justify-between py-5 px-8 md:px-10 items-center'>
                 <h4 className='font-bold text-2xl'>Customer Orders</h4>
                 <button className='cursor-pointer p-2 bg-acc-btn rounded-md hover:bg-danger-mute' onClick={() => {
@@ -274,7 +273,7 @@ export default function Cart(cartOpen) {
                                         </div>
                                     )}
                                     <div className="inline-flex items-center text-base font-semibold text-acc-color">
-                                        Ksh. {product.payload.item?.updatedPrice ? product.payload.item?.updatedPrice.toLocaleString() : product.payload.item?.price.toLocaleString()} 
+                                        Ksh. {(product.payload.item?.price * product.payload.quantity).toLocaleString()} 
                                     </div>
                                     <div className='flex gap-2'>
                                         <button

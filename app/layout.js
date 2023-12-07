@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <StoreProvider>
-      <body className={`${outfit.className}`}>
+      <body className={`bg-main-bg ${outfit.className}`}>
         {children}
       </body>
       </StoreProvider>
