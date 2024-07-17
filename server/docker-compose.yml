@@ -1,0 +1,30 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_HOST=postgres
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - APP_PORT=${APP_PORT}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    ports:
+      - "${APP_PORT}:5501"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data:
