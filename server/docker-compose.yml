@@ -3,9 +3,9 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sadattmagara254
+      POSTGRES_DB: swiftpos
     ports:
       - "5432:5432"
     volumes:
@@ -13,14 +13,15 @@ services:
 
   app:
     build: .
+    image: swift-pos
     environment:
-      - DB_USER=${DB_USER}
-      - DB_HOST=postgres
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_PORT=${DB_PORT}
-      - APP_PORT=${APP_PORT}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - DB_USER=postgres
+      - DB_HOST=localhost
+      - DB_DATABASE=swiftpos
+      - DB_PASSWORD=sadattmagara254
+      - DB_PORT=5432
+      - APP_PORT=1337
+      - JWT_SECRET_KEY=08df6bf6270ac56885e6504dad4545d0905e72742f1228c07fd143d200b60922
     ports:
       - "${APP_PORT}:5501"
     depends_on:
